@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.HeapSortTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-09-09T15:44:35" hostname="ang7y-RLEF-XX" time="0.02">
+  <properties/>
+  <testcase name="emptyHS()" classname="org.example.HeapSortTest" time="0.013"/>
+  <testcase name="testOne()" classname="org.example.HeapSortTest" time="0.001"/>
+  <testcase name="testSame()" classname="org.example.HeapSortTest" time="0.001"/>
+  <testcase name="testHS()" classname="org.example.HeapSortTest" time="0.001"/>
+  <testcase name="negHS()" classname="org.example.HeapSortTest" time="0.0"/>
+  <testcase name="testAlreadySorted()" classname="org.example.HeapSortTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
