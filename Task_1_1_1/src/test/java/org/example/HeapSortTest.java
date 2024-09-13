@@ -52,4 +52,22 @@ class HeapSortTest {
         HS.heapsort(input);
         assertArrayEquals(expected, input);
     }
+    @Test
+    void testTime() {
+        HeapSort HS = new HeapSort();
+
+        for (int size = 10000; size <= 100000; size += 10000) {
+            int[] arr = new int[size];
+            for (int i = 0; i < size; i++) {
+                arr[i] = (int) (Math.random() * 1000);
+            }
+
+            long time = System.nanoTime();
+            HS.heapsort(arr);
+            long endTime = System.nanoTime();
+
+            long duration = (endTime - time) / 100000;
+            System.out.println(size + " | " + duration);
+        }
+    }
 }
