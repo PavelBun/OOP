@@ -7,9 +7,9 @@ class HeapSortTest {
     @Test
     public void testHS(){
         HeapSort HS = new HeapSort();
-        int[] input = {5, 4, 2, 3, 1};
+        int[] input1 = {5, 4, 2, 3, 1};
         int [] needed = {1, 2, 3, 4, 5};
-        HS.heapsort(input);
+        input = HS.heapsort(input1);
         assertArrayEquals(needed, input);
     }
     @Test
@@ -24,16 +24,16 @@ class HeapSortTest {
     @Test
     public void emptyHS(){
         HeapSort HS = new HeapSort();
-        int[] input = {};
+        int[] input1 = {};
         int[] needed = {};
-        Hint[] input = new int[input1.length];
+        int[] input = new int[input1.length];
         input = HS.heapsort(input1);
         assertArrayEquals(needed, input);
     }
     @Test
     public void testAlreadySorted() {
         HeapSort HS = new HeapSort();
-        int[] input = {1, 2, 3, 4, 5};
+        int[] input1 = {1, 2, 3, 4, 5};
         int[] expected = {1, 2, 3, 4, 5};
         int[] input = new int[input1.length];
         input = HS.heapsort(input1);
@@ -51,7 +51,7 @@ class HeapSortTest {
     @Test
     public void testOne() {
         HeapSort HS = new HeapSort();
-        int[] input = {1};
+        int[] input1 = {1};
         int[] expected = {1};
         int[] input = new int[input1.length];
         input = HS.heapsort(input1);
