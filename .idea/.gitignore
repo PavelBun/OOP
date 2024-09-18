@@ -1,3 +1,14 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+# Игнорировать все файлы с расширением .log
+*.log
+
+# Игнорировать папку build/
+build/
+
+# Игнорировать все файлы в папке temp/
+temp/*
+
+# Игнорировать файл настроек IDE
+.idea/
