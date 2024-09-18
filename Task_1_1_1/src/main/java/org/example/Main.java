@@ -7,9 +7,9 @@ public class Main {
         System.out.print("[");
         for (int i = 0; i < arr.length; i++) {
             if (i == arr.length - 1) {
-                System.out.print(arr[i]);
+                System.out.print(finalarr);
             } else {
-                System.out.print(arr[i] + ", ");
+                System.out.print(finalarr + ", ");
             }
         }
         System.out.println("]");
