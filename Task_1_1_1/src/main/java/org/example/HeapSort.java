@@ -20,7 +20,8 @@ public class HeapSort {
         }
     }
     public int[] heapsort(int[] arr) {
-        int[arr.length] bufferArr;
+        int[] bufferArr;
+        bufferArr = new int[arr.length];
         for (int i = 0; i < arr.length; i++){
             bufferArr[i] = arr[i];
         }
