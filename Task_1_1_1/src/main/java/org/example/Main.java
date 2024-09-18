@@ -1,4 +1,4 @@
-package org.examplec
+package org.example;
 public class Main {
     public static void main(String[] args){
         HeapSort Sort = new HeapSort();
