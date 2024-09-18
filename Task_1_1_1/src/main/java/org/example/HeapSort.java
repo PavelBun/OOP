@@ -19,17 +19,23 @@ public class HeapSort {
             toHeap(arr, larg, len);
         }
     }
-    public void heapsort(int[] arr) {
+    public int[] heapsort(int[] arr) {
+        int[arr.length] bufferArr;
+        for (int i = 0; i < arr.length; i++){
+            bufferArr[i] = arr[i];
+        }
+
         int len = arr.length;
         int num_of_nodes = (len / 2) - 1;
         for (int i = num_of_nodes; i >= 0; i--){
-            toHeap(arr, i, len);
+            toHeap(bufferArr, i, len);
         }
         for(int i = len -1; i >0; i--){
-            int buf = arr[i];
-            arr[i] = arr[0];
-            arr[0] = buf;
+            int buf = bufferArr[i];
+            bufferArr[i] = bufferArr[0];
+            bufferArr[0] = buf;
             toHeap(arr, 0, i);
         }
+        return bufferArr;
     }
 }
