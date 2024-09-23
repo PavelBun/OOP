@@ -50,6 +50,6 @@ class PlayerTest {
     void testDisplayHand() {
         player.addCard(aceCard);
         player.addCard(kingCard);
-        assertEquals("[Туз Черви, Король Пики] > 21", player.displayHand(true));
+        assertEquals("[Туз Черви, Король Пики] => 21", player.displayHand(true));
     }
 }
