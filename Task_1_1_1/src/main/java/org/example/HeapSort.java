@@ -1,7 +1,7 @@
 package org.example;
 
 public class HeapSort {
-    public void toHeap(int[] arr, int i, int len) {
+    static public void toHeap(int[] arr, int i, int len) {
         //Дочерние элементы
         int left = 2 * i + 1;
         int right = 2 * i + 2;
@@ -23,7 +23,7 @@ public class HeapSort {
         }
     }
 
-    public int[] heapsort(int[] arr) {
+    static public int[] heapsort(int[] arr) {
         int[] bufferArr = new int[arr.length];
         System.arraycopy(arr, 0, bufferArr, 0, arr.length);
 
