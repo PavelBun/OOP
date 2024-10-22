@@ -30,7 +30,6 @@ class DeckTest {
     void testDeckShuffle() {
         Deck newDeck = new Deck();
         deck.shuffle();
-        // Проверяем, что после перемешивания колоды порядок карт изменяется
         assertNotEquals(deck.getCards(), newDeck.getCards());
     }
 }
