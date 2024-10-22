@@ -1,16 +1,13 @@
 package org.example;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 // Класс игры
 public class BlackJack {
-    private Deck deck;
-    private Player player;
-    private Player dealer;
-    private int playerScore;
-    private int dealerScore;
+    private final Deck deck;
+    public final Player player;
+    public final Player dealer;
+    public int playerScore;
+    public int dealerScore;
 
     public BlackJack() {
         deck = new Deck();
@@ -59,16 +56,29 @@ public class BlackJack {
         System.out.println("Карты дилера: [" + dealer.displayHand(false) + "]");
 
         // Ход игрока
-        playerTurn(scanner);
-
+        if (!player.isBlackJack()) {
+            playerTurn(scanner);
+        }
         if (player.isBusted()) {
             System.out.println("Вы проиграли! Превышен лимит в 21 очко.");
             dealerScore++;
             return;
         }
 
+
         // Ход дилера
         dealerTurn();
+
+        if (player.isBlackJack() && !dealer.isBlackJack()) {
+            System.out.println("Вы выиграли раунд!");
+            playerScore ++;
+            return;
+        }
+        else if (dealer.isBlackJack() && !player.isBlackJack()) {
+            System.out.println("Дилер выиграл раунд!");
+            dealerScore++;
+            return;
+        }
 
         // Итоги раунда
         determineWinner();
@@ -83,6 +93,9 @@ public class BlackJack {
                 player.addCard(deck.drawCard());
                 System.out.println("Ваши карты: " + player.displayHand(true));
                 if (player.isBusted()) {
+                    return;
+                }
+                if (player.isBlackJack()){
                     return;
                 }
             } else {
@@ -106,7 +119,7 @@ public class BlackJack {
         }
     }
 
-    private void determineWinner() {
+    public void determineWinner() {
         int playerValue = player.calculateHandValue();
         int dealerValue = dealer.calculateHandValue();
 
@@ -120,6 +133,7 @@ public class BlackJack {
             dealerScore++;
         }
     }
+
 
     public static void main(String[] args) {
         BlackJack game = new BlackJack();

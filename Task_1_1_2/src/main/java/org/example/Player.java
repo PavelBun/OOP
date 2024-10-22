@@ -1,11 +1,9 @@
 package org.example;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 class Player {
-    private List<Cards> hand;
-    private boolean isDealer;
+    private final List<Cards> hand;
+    private final boolean isDealer;
 
     public Player(boolean isDealer) {
         this.hand = new ArrayList<>();
@@ -43,6 +41,8 @@ class Player {
         return calculateHandValue() > 21;
     }
 
+    public boolean isBlackJack(){ return calculateHandValue() == 21; };
+
     public List<Cards> getHand() {
         return hand;
     }
@@ -53,4 +53,5 @@ class Player {
         }
         return hand.toString() + " => " + calculateHandValue();
     }
+
 }

@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 // Класс Card
 class Cards {
-    private String suit;
-    private String rank;
-    private int value;
+    private final String suit;
+    private final String rank;
+    private final int value;
 
     public Cards(String suit, String rank, int value) {
         this.suit = suit;
