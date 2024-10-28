@@ -25,18 +25,16 @@ public class incidence_matrixTest {
         System.out.println(graph);
 
         assertEquals(1, graph.getNeighbors(0).size());
-        assertEquals(2, graph.getNeighbors(1).size());
-        assertEquals(2, graph.getNeighbors(2).size());
-        assertEquals(1, graph.getNeighbors(3).size());
+        assertEquals(1, graph.getNeighbors(1).size());
+        assertEquals(1, graph.getNeighbors(2).size());
+        assertEquals(0, graph.getNeighbors(3).size());
 
         // Проверяем, что соседи правильные
         assertTrue(graph.getNeighbors(0).contains(1));
-        assertTrue(graph.getNeighbors(1).contains(0));
         assertTrue(graph.getNeighbors(1).contains(2));
-        assertTrue(graph.getNeighbors(2).contains(1));
         assertTrue(graph.getNeighbors(2).contains(3));
-        assertTrue(graph.getNeighbors(3).contains(2));
     }
+
     @Test
     public void testRemoveEdge() {
         graph.addEdge(0, 1);
@@ -44,7 +42,7 @@ public class incidence_matrixTest {
         graph.removeEdge(1, 2);
 
         assertEquals(1, graph.getNeighbors(0).size());
-        assertEquals(1, graph.getNeighbors(1).size());
+        assertEquals(0, graph.getNeighbors(1).size());
         assertEquals(0, graph.getNeighbors(2).size());
     }
 
