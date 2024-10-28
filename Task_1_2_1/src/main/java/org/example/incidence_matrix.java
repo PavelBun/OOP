@@ -1,10 +1,7 @@
 package org.example;
 
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class incidence_matrix implements graph {
     private final List<List<Integer>> matrix;
@@ -41,6 +38,15 @@ public class incidence_matrix implements graph {
     @Override
     public void removeVertex(int vertex) {
         if (vertex < numVertices) {
+            // Удаляем все рёбра, связанные с этой вершиной
+            for (int i = 0; i < numEdges; i++) {
+                if (matrix.get(vertex).get(i) != 0) {
+                    for (int j = 0; j < numVertices; j++) {
+                        matrix.get(j).set(i, 0);
+                    }
+                }
+            }
+            // Удаляем строку, соответствующую вершине
             matrix.remove(vertex);
             numVertices--;
         }
@@ -48,22 +54,31 @@ public class incidence_matrix implements graph {
 
     @Override
     public void addEdge(int from, int to) {
-        if (from < numVertices && to < numVertices) {
-            for (int i = 0; i < numEdges; i++) {
-                if (matrix.get(from).get(i) == 0 && matrix.get(to).get(i) == 0) {
-                    matrix.get(from).set(i, 1);
-                    matrix.get(to).set(i, -1);
-                    return;
+        if (from >= matrix.size() || to >= matrix.size()
+                || from < 0 || to < 0) {
+            return;
+        }
+
+        if (from == to) {
+            for (int i = 0; i < matrix.size(); i++) {
+                if (i == from) {
+                    matrix.get(i).add(2);
+                } else {
+                    matrix.get(i).add(0);
                 }
             }
-            // Если не нашли свободное место для ребра, увеличиваем количество ребер
-            numEdges++;
-            for (List<Integer> row : matrix) {
-                row.add(0);
+        } else {
+            for (int i = 0; i < matrix.size(); i++) {
+                if (i == from) {
+                    matrix.get(i).add(1);
+                } else if (i == to) {
+                    matrix.get(i).add(-1);
+                } else {
+                    matrix.get(i).add(0);
+                }
             }
-            matrix.get(from).set(numEdges - 1, 1);
-            matrix.get(to).set(numEdges - 1, -1);
         }
+        numEdges++; // Увеличиваем счетчик ребер
     }
 
     @Override
@@ -73,6 +88,7 @@ public class incidence_matrix implements graph {
                 if (matrix.get(from).get(i) == 1 && matrix.get(to).get(i) == -1) {
                     matrix.get(from).set(i, 0);
                     matrix.get(to).set(i, 0);
+                    numEdges--; // Уменьшаем счетчик ребер
                     return;
                 }
             }
@@ -87,6 +103,7 @@ public class incidence_matrix implements graph {
                 for (int j = 0; j < numVertices; j++) {
                     if (matrix.get(j).get(i) == -1) {
                         neighbors.add(j);
+                        break;
                     }
                 }
             }
