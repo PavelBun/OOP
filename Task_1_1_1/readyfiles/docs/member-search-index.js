@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"org.example","c":"HeapSort","l":"HeapSort()","u":"%3Cinit%3E()"},{"p":"org.example","c":"HeapSort","l":"heapsort(int[])"},{"p":"org.example","c":"HeapSort","l":"toHeap(int[], int, int)","u":"toHeap(int[],int,int)"}];updateSearchResults();
