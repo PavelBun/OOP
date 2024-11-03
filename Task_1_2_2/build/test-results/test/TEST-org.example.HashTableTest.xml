@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.HashTableTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2024-11-03T12:23:36" hostname="ang7y-RLEF-XX" time="0.039">
+  <properties/>
+  <testcase name="testSize()" classname="org.example.HashTableTest" time="0.018"/>
+  <testcase name="testToString()" classname="org.example.HashTableTest" time="0.004"/>
+  <testcase name="testContainsKey()" classname="org.example.HashTableTest" time="0.002"/>
+  <testcase name="testPutAndGet()" classname="org.example.HashTableTest" time="0.003"/>
+  <testcase name="testEquals()" classname="org.example.HashTableTest" time="0.002"/>
+  <testcase name="testIsEmpty()" classname="org.example.HashTableTest" time="0.001"/>
+  <testcase name="testRemove()" classname="org.example.HashTableTest" time="0.001"/>
+  <testcase name="testIterator()" classname="org.example.HashTableTest" time="0.002"/>
+  <testcase name="testConcurrentModificationException()" classname="org.example.HashTableTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
