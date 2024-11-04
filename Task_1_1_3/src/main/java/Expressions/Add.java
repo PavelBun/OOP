@@ -1,6 +1,8 @@
-package org.example;
+package Expressions;
+import org.example.Expression;
+
 import java.util.Map;
-public class Add extends Expression{
+public class Add extends Expression {
     private final Expression first;
     private final Expression second;
     public Add(Expression first, Expression second) {

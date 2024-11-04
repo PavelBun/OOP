@@ -1,6 +1,8 @@
-package org.example;
+package Expressions;
+import org.example.Expression;
+
 import java.util.Map;
-public class Mul extends Expression{
+public class Mul extends Expression {
     private final Expression first;
     private final Expression second;
     public Mul(Expression first, Expression second) {
@@ -20,6 +22,9 @@ public class Mul extends Expression{
 
     @Override
     public Expression derivative(String variable) {
-        return new Mul(first.derivative(variable), second.derivative(variable));
+        return new Add(
+                new Mul(first.derivative(variable), second),
+                new Mul(first, second.derivative(variable))
+        );
     }
 }

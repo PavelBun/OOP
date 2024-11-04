@@ -1,6 +1,11 @@
-package org.example;
+package Expressions;
+
+import org.example.Expression;
+import org.example.UndefinedVariableException;
 
 import java.util.Map;
+
+
 
 public class Variable extends Expression {
     private final String var;
@@ -10,11 +15,11 @@ public class Variable extends Expression {
     }
 
     @Override
-    public double evaluate(Map<String, Double> variables) {
+    public double evaluate(Map<String, Double> variables){
         if (variables.containsKey(var)) {
             return variables.get(var);
         } else {
-            throw new IllegalArgumentException("Variable " + var + " not defined");
+            throw new UndefinedVariableException("Variable " + var + " not defined");
         }
     }
 
