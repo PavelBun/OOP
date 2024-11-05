@@ -40,7 +40,7 @@ public class MainTest {
         Expression e = new Add(new Expressions.Number(3), new Mul(new Expressions.Number(2), new Variable("y")));
 
         Map<String, Double> variables = new HashMap<>();
-        variables.put("x", 10.0);  // Переменной "y" нет в карте
+        variables.put("x", 10.0);
 
         try {
             e.evaluate(variables);
