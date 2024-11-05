@@ -22,7 +22,7 @@ public class MainTest {
         assertEquals(expected, result);
     }
 
-    // Тест для выражения Add(Number(3), Mul(Number(2), Variable("x")))
+    // выражение 3+2*x
     @Test
     public void testExpressionEvaluation() {
         Expression e = new Add(new Expressions.Number(3), new Mul(new Expressions.Number(2), new Variable("x")));
@@ -50,7 +50,7 @@ public class MainTest {
         }
     }
 
-    // Тест для выражения без переменных (например, просто числа)
+    // 5+10
     @Test
     public void testExpressionWithNoVariables() {
         Expression e = new Add(new Expressions.Number(5), new Expressions.Number(10));
@@ -61,7 +61,7 @@ public class MainTest {
         assertEquals(15.0, result, 0.001);
     }
 
-    // Тест для выражения Sub(Number(10), Number(5))
+    // 10 - 5
     @Test
     public void testSubExpression() {
         Expression e = new Sub(new Expressions.Number(10), new Expressions.Number(5));
@@ -72,7 +72,7 @@ public class MainTest {
         assertEquals(5.0, result, 0.001);
     }
 
-    // Тест для выражения Div(Number(10), Number(2))
+    // 10/2
     @Test
     public void testDivExpression() {
         Expression e = new Div(new Expressions.Number(10), new Expressions.Number(2));
