@@ -116,31 +116,41 @@ public class adjacency_matrix implements graph {
     }
 
     @Override
-    public List<Integer> topologicalSort() {
+    public List<Integer> topologicalSort() throws Exception {
         List<Integer> result = new ArrayList<>();
         boolean[] visited = new boolean[numVertices];
-        Stack<Integer> stack = new Stack<>();
+        boolean[] stack = new boolean[numVertices];
 
         for (int i = 0; i < numVertices; i++) {
             if (!visited[i]) {
-                topSort(i, visited, stack);
+                if (topSort(i, visited, stack, result)) {
+                    throw new Exception("Graph contains a cycle");
+                }
             }
-        }
-
-        while (!stack.isEmpty()) {
-            result.add(stack.pop());
         }
 
         return result;
     }
 
-    private void topSort(int v, boolean[] visited, Stack<Integer> stack) {
+    private boolean topSort(int v, boolean[] visited, boolean[] stack, List<Integer> result) {
+        if (stack[v]) {
+            return true;
+        }
+        if (visited[v]) {
+            return false;
+        }
+
         visited[v] = true;
+        stack[v] = true;
+
         for (int i = 0; i < numVertices; i++) {
-            if (matrix.get(v).get(i) == 1 && !visited[i]) {
-                topSort(i, visited, stack);
+            if (matrix.get(v).get(i) == 1 && topSort(i, visited, stack, result)) {
+                return true; // цикл
             }
         }
-        stack.push(v);
+
+        stack[v] = false;
+        result.add(0, v);
+        return false;
     }
 }
