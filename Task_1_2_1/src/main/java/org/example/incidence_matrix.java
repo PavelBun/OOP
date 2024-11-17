@@ -8,15 +8,13 @@ public class incidence_matrix implements graph {
     private int numVertices;
     private int numEdges;
 
-    public incidence_matrix(int numVertices, int numEdges) {
+
+    public incidence_matrix(int numVertices) {
         this.numVertices = numVertices;
-        this.numEdges = numEdges;
+        this.numEdges = 0;
         this.matrix = new ArrayList<>(numVertices);
         for (int i = 0; i < numVertices; i++) {
             List<Integer> row = new ArrayList<>(numEdges);
-            for (int j = 0; j < numEdges; j++) {
-                row.add(0);
-            }
             this.matrix.add(row);
         }
     }
@@ -38,7 +36,6 @@ public class incidence_matrix implements graph {
     @Override
     public void removeVertex(int vertex) {
         if (vertex < numVertices) {
-            // Удаляем все рёбра, связанные с этой вершиной
             for (int i = 0; i < numEdges; i++) {
                 if (matrix.get(vertex).get(i) != 0) {
                     for (int j = 0; j < numVertices; j++) {
@@ -46,7 +43,7 @@ public class incidence_matrix implements graph {
                     }
                 }
             }
-            // Удаляем строку, соответствующую вершине
+            // Удаляем строку
             matrix.remove(vertex);
             numVertices--;
         }
@@ -54,6 +51,7 @@ public class incidence_matrix implements graph {
 
     @Override
     public void addEdge(int from, int to) {
+        numEdges++;
         if (from >= matrix.size() || to >= matrix.size()
                 || from < 0 || to < 0) {
             return;
@@ -78,7 +76,6 @@ public class incidence_matrix implements graph {
                 }
             }
         }
-        numEdges++; // Увеличиваем счетчик ребер
     }
 
     @Override
@@ -116,6 +113,25 @@ public class incidence_matrix implements graph {
         try (FileReader reader = new FileReader(filePath)) {
             Scanner fileScanner = new Scanner(reader);
             int row = 0;
+            int maxCols = 0;
+
+
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                String[] values = line.split(" ");
+                maxCols = Math.max(maxCols, values.length);
+            }
+            fileScanner = new Scanner(new FileReader(filePath));
+
+            this.numEdges = maxCols;
+
+            for (List<Integer> rowList : matrix) {
+                rowList.clear();
+                for (int i = 0; i < numEdges; i++) {
+                    rowList.add(0);
+                }
+            }
+            row = 0;
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
                 String[] values = line.split(" ");
@@ -128,7 +144,6 @@ public class incidence_matrix implements graph {
             throw new Exception(ex.getMessage());
         }
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -150,35 +165,45 @@ public class incidence_matrix implements graph {
     }
 
     @Override
-    public List<Integer> topologicalSort() {
+    public List<Integer> topologicalSort() throws Exception {
         List<Integer> result = new ArrayList<>();
         boolean[] visited = new boolean[numVertices];
-        Stack<Integer> stack = new Stack<>();
+        boolean[] stack = new boolean[numVertices];
 
         for (int i = 0; i < numVertices; i++) {
             if (!visited[i]) {
-                topSort(i, visited, stack);
+                if (topSort(i, visited, stack, result)) {
+                    throw new Exception("Graph contains a cycle");
+                }
             }
-        }
-
-        while (!stack.isEmpty()) {
-            result.add(stack.pop());
         }
 
         return result;
     }
 
-    private void topSort(int v, boolean[] visited, Stack<Integer> stack) {
+    private boolean topSort(int v, boolean[] visited, boolean[] stack, List<Integer> result) {
+        if (stack[v]) {
+            return true; // цикл
+        }
+
+        if (visited[v]) {
+            return false;
+        }
+
         visited[v] = true;
+        stack[v] = true;
+
         for (int i = 0; i < numEdges; i++) {
             if (matrix.get(v).get(i) == 1) {
                 for (int j = 0; j < numVertices; j++) {
-                    if (matrix.get(j).get(i) == -1 && !visited[j]) {
-                        topSort(j, visited, stack);
+                    if (matrix.get(j).get(i) == -1 && topSort(j, visited, stack, result)) {
+                        return true; // цикл
                     }
                 }
             }
         }
-        stack.push(v);
+        stack[v] = false;
+        result.add(0, v);
+        return false;
     }
 }
