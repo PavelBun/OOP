@@ -57,14 +57,67 @@ public class adjacency_matrixTest {
     }
 
     @Test
-    public void testTopologicalSort() {
+    public void testTopologicalSort() throws Exception {
         graph.addEdge(0, 1);
-        graph.addEdge(1, 2);
-        graph.addEdge(2, 3);
+        graph.addEdge(1, 3);
+        graph.addEdge(3, 2);
 
         List<Integer> sorted = graph.topologicalSort();
         assertEquals(4, sorted.size());
         assertEquals(0, sorted.get(0));
-        assertEquals(3, sorted.get(3));
+        assertEquals(2, sorted.get(3));
     }
+    @Test
+    public void testCycle() throws Exception{
+        graph.addEdge(0, 1);
+        graph.addEdge(1, 2);
+        graph.addEdge(2, 3);
+        graph.addEdge(3, 0);
+        String expectedMessage = "Graph contains a cycle";
+        try {
+            List<Integer> sorted = graph.topologicalSort();
+        }
+        catch (Exception e){
+            assertEquals(expectedMessage, e.getMessage());
+        }
+
+    }
+    @Test
+    public void testEquals() {
+        adjacency_matrix matrix1 = new adjacency_matrix(3);
+        adjacency_matrix matrix2 = new adjacency_matrix(3);
+
+        matrix1.addEdge(0, 1);
+        matrix1.addEdge(1, 2);
+        matrix2.addEdge(0, 1);
+        matrix2.addEdge(1, 2);
+
+        assertTrue(matrix1.equals(matrix2));
+
+        // Изменяем
+        matrix2.addEdge(2, 0);
+
+        // Проверяем
+        assertFalse(matrix1.equals(matrix2));
+    }
+
+    @Test
+    public void testReadFromFile() throws Exception {
+
+        // Читаем матрицу из файла
+        graph.readFromFile("src/test/resources/test_adjacency_matrix.txt");
+
+        // Ожидаемая матрица
+        adjacency_matrix expectedMatrix = new adjacency_matrix(4);
+        expectedMatrix.addEdge(0, 1);
+        expectedMatrix.addEdge(1, 2);
+        expectedMatrix.addEdge(2, 3);
+        expectedMatrix.addEdge(3, 0);
+
+
+        // Проверяем, что матрицы равны
+        assertTrue(graph.equals(expectedMatrix));
+    }
+
+
 }
