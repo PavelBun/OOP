@@ -8,6 +8,6 @@ public interface graph {
     void removeEdge(int from, int to);
     List<Integer> getNeighbors(int vertex);
     void readFromFile(String filePath) throws Exception;
-    String toString();
-    List<Integer> topologicalSort();
+
+    List<Integer> topologicalSort() throws Exception;
 }
