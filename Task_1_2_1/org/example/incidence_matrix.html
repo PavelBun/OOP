@@ -14,7 +14,7 @@
 <!--[if IE]>
 <script type="text/javascript" src="../../jquery/jszip-utils/dist/jszip-utils-ie.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="../../jquery/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="../../jquery/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="../../jquery/jquery-ui.min.js"></script>
 </head>
 <body>
@@ -157,8 +157,7 @@ implements <a href="graph.html" title="interface in org.example">graph</a></pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int,int)">incidence_matrix</a></span>&#8203;(int&nbsp;numVertices,
-                int&nbsp;numEdges)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(int)">incidence_matrix</a></span>&#8203;(int&nbsp;numVertices)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -250,14 +249,13 @@ implements <a href="graph.html" title="interface in org.example">graph</a></pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(int,int)">
+<a id="&lt;init&gt;(int)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>incidence_matrix</h4>
-<pre>public&nbsp;incidence_matrix&#8203;(int&nbsp;numVertices,
-                        int&nbsp;numEdges)</pre>
+<pre>public&nbsp;incidence_matrix&#8203;(int&nbsp;numVertices)</pre>
 </li>
 </ul>
 </li>
@@ -374,8 +372,6 @@ implements <a href="graph.html" title="interface in org.example">graph</a></pre>
 <h4>toString</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;toString()</pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="graph.html#toString()">toString</a></code>&nbsp;in interface&nbsp;<code><a href="graph.html" title="interface in org.example">graph</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 </dl>
@@ -387,10 +383,13 @@ implements <a href="graph.html" title="interface in org.example">graph</a></pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>topologicalSort</h4>
-<pre class="methodSignature">public&nbsp;java.util.List&lt;java.lang.Integer&gt;&nbsp;topologicalSort()</pre>
+<pre class="methodSignature">public&nbsp;java.util.List&lt;java.lang.Integer&gt;&nbsp;topologicalSort()
+                                                  throws java.lang.Exception</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="graph.html#topologicalSort()">topologicalSort</a></code>&nbsp;in interface&nbsp;<code><a href="graph.html" title="interface in org.example">graph</a></code></dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.Exception</code></dd>
 </dl>
 </li>
 </ul>
