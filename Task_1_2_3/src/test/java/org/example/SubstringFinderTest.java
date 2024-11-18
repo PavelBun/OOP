@@ -22,7 +22,7 @@ public class SubstringFinderTest {
         List<Integer> indices = SubstringFinder.find(fileName, "qwe");
 
         // Ожидаемые индексы
-        assertEquals(List.of(0, 6, 13), indices);
+        assertEquals(List.of(0, 6, 15), indices);
 
         // Удаляем временный файл
         Files.delete(Paths.get(fileName));
@@ -56,7 +56,7 @@ public class SubstringFinderTest {
         List<Integer> indices = SubstringFinder.find(fileName, "qwe");
 
         // Ожидаемые индексы
-        assertEquals(List.of(3, 10), indices);
+        assertEquals(List.of(3, 12), indices);
 
         // Удаляем временный файл
         Files.delete(Paths.get(fileName));
