@@ -130,4 +130,12 @@ class HashTableTest {
 
         assertThrows(ConcurrentModificationException.class, iterator::next);
     }
+    @Test
+    void testUpdate(){
+        hashTable.put("one", 1);
+        hashTable.put("two", 2);
+
+        hashTable.update("one", 3);
+        assertEquals(3, hashTable.get("one"));
+    }
 }
