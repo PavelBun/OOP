@@ -13,18 +13,16 @@ public class SubstringFinderTest {
 
     @Test
     public void testFindSubstringInFile() throws IOException {
-        // Создаем временный файл с содержимым
         String fileName = "testFile.txt";
         String content = "qweasdqwezxcasdqwe";
         Files.write(Paths.get(fileName), content.getBytes());
 
-        // Ищем подстроку "qwe"
+
         List<Integer> indices = SubstringFinder.find(fileName, "qwe");
 
-        // Ожидаемые индексы
+
         assertEquals(List.of(0, 6, 15), indices);
 
-        // Удаляем временный файл
         Files.delete(Paths.get(fileName));
     }
 
@@ -35,10 +33,8 @@ public class SubstringFinderTest {
         String content = "asdzxcqweasdzxc";
         Files.write(Paths.get(fileName), content.getBytes());
 
-        // Ищем подстроку "qaz"
         List<Integer> indices = SubstringFinder.find(fileName, "qaz");
 
-        // Ожидаемый результат - пустой список
         assertEquals(List.of(), indices);
 
         // Удаляем временный файл
@@ -47,7 +43,7 @@ public class SubstringFinderTest {
 
     @Test
     public void testFindSubstringCrossingBufferBoundaries() throws IOException {
-        // Создаем временный файл с содержимым
+
         String fileName = "testFile.txt";
         String content = "asdqwezxcasdqwe";
         Files.write(Paths.get(fileName), content.getBytes());
@@ -64,35 +60,43 @@ public class SubstringFinderTest {
 
     @Test
     public void testFindSubstringAtFileEnd() throws IOException {
-        // Создаем временный файл с содержимым
+
         String fileName = "testFile.txt";
         String content = "asdzxcqwe";
         Files.write(Paths.get(fileName), content.getBytes());
 
-        // Ищем подстроку "qwe"
         List<Integer> indices = SubstringFinder.find(fileName, "qwe");
 
-        // Ожидаемый индекс
         assertEquals(List.of(6), indices);
 
-        // Удаляем временный файл
         Files.delete(Paths.get(fileName));
     }
 
     @Test
     public void testFindSubstringAtFileStart() throws IOException {
-        // Создаем временный файл с содержимым
+
         String fileName = "testFile.txt";
         String content = "qweasdzxc";
         Files.write(Paths.get(fileName), content.getBytes());
 
-        // Ищем подстроку "qwe"
         List<Integer> indices = SubstringFinder.find(fileName, "qwe");
 
-        // Ожидаемый индекс
+
         assertEquals(List.of(0), indices);
 
-        // Удаляем временный файл
         Files.delete(Paths.get(fileName));
     }
+    @Test
+    public void testFindChineseSubstring() throws IOException {
+        String fileName = "testFile.txt";
+        String content = "你好世界 你好 你好世界";
+        Files.write(Paths.get(fileName), content.getBytes("UTF-8"));
+
+        List<Integer> indices = SubstringFinder.find(fileName, "你好");
+
+        assertEquals(List.of(0, 5, 8), indices);
+
+        Files.delete(Paths.get(fileName));
+    }
+
 }
