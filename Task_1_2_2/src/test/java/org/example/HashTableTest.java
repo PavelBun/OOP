@@ -138,4 +138,18 @@ class HashTableTest {
         hashTable.update("one", 3);
         assertEquals(3, hashTable.get("one"));
     }
+    @Test
+    public void testEquals_Same() {
+        HashTable<String, Integer> table1 = new HashTable<>();
+        table1.put("a", 1);
+        table1.put("b", 2);
+        table1.put("c", 3);
+
+        HashTable<String, Integer> table2 = new HashTable<>();
+        table2.put("a", 1);
+        table2.put("b", 2);
+        table2.put("c", 3);
+
+        assertTrue(table1.equals(table2));
+    }
 }
