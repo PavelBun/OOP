@@ -8,7 +8,7 @@ public class SubstringFinder {
 
     public static List<Integer> find(String fileName, String substring) throws IOException {
         List<Integer> indices = new ArrayList<>();
-        int substringLength = substring.length(); // длина подстроки в символах
+        int substringLength = substring.length(); // длина подстроки в символа
         int offset = 0;
         int overlap = substringLength - 1; // перекрытие для учета границ частей
 
