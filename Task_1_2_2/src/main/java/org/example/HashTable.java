@@ -203,6 +203,15 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         if (key == null) {
             throw new IllegalArgumentException("Key cannot be null");
         }
+        int index = hash(key);
+        if (table[index]!= null) {
+            for (Entry<K, V> entry : table[index]) {
+                if (entry.getKey().equals(key)) {
+                    entry.setValue(value);
+                    return;
+                }
+            }
+        }
         put(key, value);
     }
 
