@@ -1,25 +1,26 @@
 package org.example;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class SubstringFinder {
 
     public static List<Integer> find(String fileName, String substring) throws IOException {
         List<Integer> indices = new ArrayList<>();
-        int substringLength = substring.length();
-        byte[] substringBytes = substring.getBytes("UTF-8");
-        byte[] buffer = new byte[1024]; // Размер буфера для чтения файла
+        int substringLength = substring.length(); // длина подстроки в символах
         int offset = 0;
-        int bytesRead;
-        int overlap = substringLength - 1; // Перекрытие для учета границ частей
+        int overlap = substringLength - 1; // перекрытие для учета границ частей
 
-        try (InputStream inputStream = new BufferedInputStream(new FileInputStream(fileName))) {
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                // Преобразуем буфер в строку для поиска
-                String chunk = new String(buffer, 0, bytesRead, "UTF-8");
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8))) {
+            char[] buffer = new char[1024];
+            int charsRead;
 
-                // Ищем вхождения подстроки в текущем чанке
+            while ((charsRead = reader.read(buffer)) != -1) {
+                // преобразуем буфер в строку для поиска
+                String chunk = new String(buffer, 0, charsRead);
+
+                // ищем вхождения подстроки в текущем чанке
                 int index = 0;
                 while ((index = chunk.indexOf(substring, index)) != -1) {
                     indices.add(offset + index);
@@ -27,11 +28,11 @@ public class SubstringFinder {
                 }
 
                 // Обновляем смещение
-                offset += bytesRead - overlap;
+                offset += charsRead - overlap;
 
-                // Если есть перекрытие, сохраняем последние байты для следующей итерации
+                // если есть перекрытие сохраняем последние символы для следующей итерации
                 if (overlap > 0) {
-                    System.arraycopy(buffer, bytesRead - overlap, buffer, 0, overlap);
+                    System.arraycopy(buffer, charsRead - overlap, buffer, 0, overlap);
                 }
             }
         }
@@ -42,7 +43,7 @@ public class SubstringFinder {
     public static void main(String[] args) {
         try {
             List<Integer> indices = find("/home/ang7y/IdeaProjects/OOP7/Task_1_2_3/src/main/resources/teext.txt", "qwe");
-            System.out.println(indices); // Вывод: [1, 8]
+            System.out.println(indices);
         } catch (IOException e) {
             e.printStackTrace();
         }
