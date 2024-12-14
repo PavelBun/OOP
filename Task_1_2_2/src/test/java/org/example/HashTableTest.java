@@ -39,6 +39,7 @@ class HashTableTest {
         assertEquals(2, hashTable.size());
     }
 
+
     @Test
     void testContainsKey() {
         hashTable.put("one", 1);
@@ -151,5 +152,14 @@ class HashTableTest {
         table2.put("c", 3);
 
         assertTrue(table1.equals(table2));
+    }
+    @Test
+    void testUpdate_exception(){
+        hashTable.put("one", 1);
+        hashTable.put("two", 2);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            hashTable.update("four", 3);
+        });
     }
 }
