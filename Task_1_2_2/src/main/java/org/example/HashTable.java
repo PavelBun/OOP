@@ -212,7 +212,7 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
                 }
             }
         }
-        put(key, value);
+        throw new IllegalArgumentException("key not found");
     }
 
     private static class Entry<K, V> implements Map.Entry<K, V> {
