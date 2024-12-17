@@ -1,13 +1,18 @@
 package org.example;
 
+
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SubstringFinderTest {
 
@@ -28,7 +33,7 @@ public class SubstringFinderTest {
 
     @Test
     public void testFindSubstringNotInFile() throws IOException {
-        // Создаем временный файл с содержимым
+        
         String fileName = "testFile.txt";
         String content = "asdzxcqweasdzxc";
         Files.write(Paths.get(fileName), content.getBytes());
@@ -37,7 +42,6 @@ public class SubstringFinderTest {
 
         assertEquals(List.of(), indices);
 
-        // Удаляем временный файл
         Files.delete(Paths.get(fileName));
     }
 
@@ -98,5 +102,19 @@ public class SubstringFinderTest {
 
         Files.delete(Paths.get(fileName));
     }
+    @Test
+    public void testLlongText() throws IOException {
+        try (FileWriter fwrite = new FileWriter("longtext.txt")) {
+            fwrite.write("привет".repeat(3000000));
+        }
 
+        List<Integer> indices = SubstringFinder.find("longtext.txt", "при");
+
+        File file = new File("longtext.txt");
+        if (file.exists()) {
+            assertTrue(file.delete());
+        }
+
+        assertEquals(3000000, indices.size()); 
+    }
 }
