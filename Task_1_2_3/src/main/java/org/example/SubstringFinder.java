@@ -8,15 +8,15 @@ public class SubstringFinder {
 
     public static List<Integer> find(String fileName, String substring) throws IOException {
         List<Integer> indices = new ArrayList<>();
-        int substringLength = substring.length(); // длина подстроки в символа
+        int substringLength = substring.length(); // длина подстроки в символах
         int offset = 0;
-        int overlap = substringLength - 1; // перекрытие для учета границ частей
+        int overlap = substringLength - 1; // перекрытие 
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8))) {
-            char[] buffer = new char[1024];
+            char[] buffer = new char[1024 + overlap];
             int charsRead;
 
-            while ((charsRead = reader.read(buffer)) != -1) {
+            while ((charsRead = reader.read(buffer, 0, buffer.length)) != -1) {
                 // преобразуем буфер в строку для поиска
                 String chunk = new String(buffer, 0, charsRead);
 
@@ -27,10 +27,10 @@ public class SubstringFinder {
                     index += substringLength;
                 }
 
-                // Обновляем смещение
+                // обновляем смещение
                 offset += charsRead - overlap;
 
-                // если есть перекрытие сохраняем последние символы для следующей итерации
+                // если есть перекрытие, сохраняем последние символы для следующей итерации
                 if (overlap > 0) {
                     System.arraycopy(buffer, charsRead - overlap, buffer, 0, overlap);
                 }
