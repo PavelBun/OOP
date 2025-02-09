@@ -55,6 +55,16 @@ public class ParallelPrime extends Thread{
         }
         return res;
     }
+    public static void main(String[] args) throws InterruptedException {
+        int[] array = new int[100_000_000];
+        Arrays.fill(array, 17); // Заполняем простыми числами
+        array[array.length - 1] = 100; // Добавляем составное число
+        long startTime = System.nanoTime();
+        boolean result = isContain(array, 4);
+        long endTime = System.nanoTime();
+        System.out.println("Result: " + result);
+        System.out.println("Time taken: " + (endTime - startTime) /1000000000f + " ns");
+    }
 
 
 
