@@ -61,7 +61,7 @@ public class ParallelPrime extends Thread{
 
 
     public static void main(String[] args) throws InterruptedException {
-        int[] array = new int[100_000_000];
+        int[] array = new int[1000_000_000];
         Arrays.fill(array, 17); // Заполняем простыми числами
         array[array.length - 1] = 100; // Добавляем составное число
         long startTime = System.nanoTime();
