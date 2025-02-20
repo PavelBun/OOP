@@ -25,7 +25,8 @@ class ParallelPrimeTest {
         int[] array = new int[1000];
         Arrays.fill(array, 17);
 
-        assertFalse(ParallelPrime.isContain(array, 4));
+        ParallelPrime parallelPrime = new ParallelPrime(0, array.length, array, 4);
+        assertFalse(parallelPrime.isContain(array));
     }
 
     @Test
@@ -34,8 +35,8 @@ class ParallelPrimeTest {
         Arrays.fill(array, 17);
         array[array.length - 1] = 100;
 
-
-        assertTrue(ParallelPrime.isContain(array, 4));
+        ParallelPrime parallelPrime = new ParallelPrime(0, array.length, array, 4);
+        assertTrue(parallelPrime.isContain(array));
     }
 
     @Test
@@ -43,9 +44,9 @@ class ParallelPrimeTest {
         int[] array = new int[100_000_000];
         Arrays.fill(array, 17);
         array[array.length - 1] = 100;
-
+        ParallelPrime parallelPrime = new ParallelPrime(0, array.length, array, 4);
         long startTime = System.nanoTime();
-        boolean result = ParallelPrime.isContain(array, 4);
+        boolean result = parallelPrime.isContain(array);
         long endTime = System.nanoTime();
 
 

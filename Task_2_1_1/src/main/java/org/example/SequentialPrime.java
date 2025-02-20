@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public class SequentialPrime {
     public static boolean isPrime(int n) {
-        if (n < 2){
+        if (n < 2) {
             return false;
         }
-        for (int i = 2; i * i <= n; i++){
-            if (n % i == 0){
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) {
                 return false;
             }
         }
