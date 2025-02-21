@@ -26,8 +26,8 @@ class SequentialPrimeTest {
         int[] array = new int[1000];
         Arrays.fill(array, 17);
 
-
-        assertFalse(SequentialPrime.isContain(array));
+        SequentialPrime sequentialPrime = new SequentialPrime();
+        assertFalse(sequentialPrime.isContain(array));
     }
 
     @Test
@@ -37,8 +37,8 @@ class SequentialPrimeTest {
         Arrays.fill(array, 17);
         array[array.length - 1] = 100;
 
-
-        assertTrue(SequentialPrime.isContain(array));
+        SequentialPrime sequentialPrime = new SequentialPrime();
+        assertTrue(sequentialPrime.isContain(array));
     }
 
     @Test
@@ -48,9 +48,9 @@ class SequentialPrimeTest {
         Arrays.fill(array, 17);
         array[array.length - 1] = 100;
 
-
+        SequentialPrime sequentialPrime = new SequentialPrime();
         long startTime = System.nanoTime();
-        boolean result = SequentialPrime.isContain(array);
+        boolean result = sequentialPrime.isContain(array);
         long endTime = System.nanoTime();
 
         assertTrue(result);

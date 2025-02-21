@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Arrays;
 
-public class SequentialPrime {
+public class SequentialPrime implements PrimeChecker{
     public static boolean isPrime(int n) {
         if (n < 2) {
             return false;
@@ -14,7 +14,7 @@ public class SequentialPrime {
         }
         return true;
     }
-    public static boolean isContain(int[] arr){
+    public boolean isContain(int[] arr){
         for (int i : arr){
             if (!isPrime(i)){
                 return true;
