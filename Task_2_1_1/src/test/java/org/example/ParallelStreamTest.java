@@ -26,8 +26,8 @@ class ParallelStreamTest {
         int[] array = new int[1000];
         Arrays.fill(array, 17);
 
-        ParallelStream parallelStream = new ParallelStream();
-        assertFalse(parallelStream.isContain(array));
+        ParallelStream parallelStream = new ParallelStream(array);
+        assertFalse(parallelStream.isContain());
     }
 
     @Test
@@ -37,8 +37,8 @@ class ParallelStreamTest {
         Arrays.fill(array, 17);
         array[array.length - 1] = 100;
 
-        ParallelStream parallelStream = new ParallelStream();
-        assertTrue(parallelStream.isContain(array));
+        ParallelStream parallelStream = new ParallelStream(array);
+        assertTrue(parallelStream.isContain());
     }
 
     @Test
@@ -47,9 +47,9 @@ class ParallelStreamTest {
         int[] array = new int[100_000_000];
         Arrays.fill(array, 17);
         array[array.length - 1] = 100;
-        ParallelStream parallelStream = new ParallelStream();
+        ParallelStream parallelStream = new ParallelStream(array);
         long startTime = System.nanoTime();
-        boolean result = parallelStream.isContain(array);
+        boolean result = parallelStream.isContain();
         long endTime = System.nanoTime();
 
         assertTrue(result);
