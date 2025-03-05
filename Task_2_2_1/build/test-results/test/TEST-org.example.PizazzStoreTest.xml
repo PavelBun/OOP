@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.PizazzStoreTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-03-05T16:33:54" hostname="ang7y-RLEF-XX" time="0.025">
+  <properties/>
+  <testcase name="testStorageCapacity()" classname="org.example.PizazzStoreTest" time="0.019"/>
+  <testcase name="testCourierPickup()" classname="org.example.PizazzStoreTest" time="0.001"/>
+  <testcase name="testOrderPlacement()" classname="org.example.PizazzStoreTest" time="0.002"/>
+  <testcase name="testStopAcceptingOrders()" classname="org.example.PizazzStoreTest" time="0.001"/>
+  <system-out><![CDATA[Order: 1 is ready
+Order: 2 is ready
+Order: 1 is ready
+Order: 2 is ready
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
