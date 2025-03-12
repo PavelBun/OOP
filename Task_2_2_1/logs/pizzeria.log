@@ -1,0 +1,118 @@
+2025-03-12 23:29:48 INFO  Main:12 - Starting Pizzeria application...
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 1 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 2 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 3 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 4 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 5 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 6 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 7 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 8 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 9 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 10 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 11 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 12 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 13 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 14 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 15 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 16 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 17 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 18 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 19 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:28 - Order 20 placed successfully.
+2025-03-12 23:29:48 INFO  PizazzStore:41 - Order 1 taken by baker.
+2025-03-12 23:29:48 INFO  Baker:27 - Order: 1 is cooking by baker number: 1
+2025-03-12 23:29:48 INFO  PizazzStore:41 - Order 2 taken by baker.
+2025-03-12 23:29:48 INFO  Baker:27 - Order: 2 is cooking by baker number: 4
+2025-03-12 23:29:48 INFO  PizazzStore:41 - Order 3 taken by baker.
+2025-03-12 23:29:48 INFO  Baker:27 - Order: 3 is cooking by baker number: 2
+2025-03-12 23:29:48 INFO  PizazzStore:41 - Order 4 taken by baker.
+2025-03-12 23:29:48 INFO  Baker:27 - Order: 4 is cooking by baker number: 3
+2025-03-12 23:29:50 INFO  PizazzStore:54 - Order 1 is ready and stored.
+2025-03-12 23:29:50 INFO  PizazzStore:41 - Order 5 taken by baker.
+2025-03-12 23:29:50 INFO  Baker:27 - Order: 5 is cooking by baker number: 1
+2025-03-12 23:29:50 INFO  PizazzStore:70 - Batch of 1 pizzas taken by courier.
+2025-03-12 23:29:50 INFO  Courier:29 - Courier: Artemy Kuleshov is delivering 1 pizzas
+2025-03-12 23:29:51 INFO  PizazzStore:54 - Order 3 is ready and stored.
+2025-03-12 23:29:51 INFO  PizazzStore:41 - Order 6 taken by baker.
+2025-03-12 23:29:51 INFO  Baker:27 - Order: 6 is cooking by baker number: 2
+2025-03-12 23:29:51 INFO  PizazzStore:70 - Batch of 1 pizzas taken by courier.
+2025-03-12 23:29:51 INFO  Courier:29 - Courier: Nikita Krainov is delivering 1 pizzas
+2025-03-12 23:29:52 INFO  PizazzStore:54 - Order 5 is ready and stored.
+2025-03-12 23:29:52 INFO  PizazzStore:41 - Order 7 taken by baker.
+2025-03-12 23:29:52 INFO  Baker:27 - Order: 7 is cooking by baker number: 1
+2025-03-12 23:29:52 INFO  PizazzStore:70 - Batch of 1 pizzas taken by courier.
+2025-03-12 23:29:52 INFO  Courier:29 - Courier: Ochir Khubanov is delivering 1 pizzas
+2025-03-12 23:29:52 INFO  PizazzStore:54 - Order 4 is ready and stored.
+2025-03-12 23:29:52 INFO  PizazzStore:41 - Order 8 taken by baker.
+2025-03-12 23:29:52 INFO  Baker:27 - Order: 8 is cooking by baker number: 3
+2025-03-12 23:29:53 INFO  PizazzStore:54 - Order 2 is ready and stored.
+2025-03-12 23:29:53 INFO  PizazzStore:41 - Order 9 taken by baker.
+2025-03-12 23:29:53 INFO  Baker:27 - Order: 9 is cooking by baker number: 4
+2025-03-12 23:29:54 INFO  PizazzStore:54 - Order 6 is ready and stored.
+2025-03-12 23:29:54 INFO  PizazzStore:41 - Order 10 taken by baker.
+2025-03-12 23:29:54 INFO  Baker:27 - Order: 10 is cooking by baker number: 2
+2025-03-12 23:29:54 INFO  PizazzStore:54 - Order 7 is ready and stored.
+2025-03-12 23:29:54 INFO  PizazzStore:41 - Order 11 taken by baker.
+2025-03-12 23:29:54 INFO  Baker:27 - Order: 11 is cooking by baker number: 1
+2025-03-12 23:29:56 INFO  PizazzStore:54 - Order 11 is ready and stored.
+2025-03-12 23:29:56 INFO  PizazzStore:41 - Order 12 taken by baker.
+2025-03-12 23:29:56 INFO  Baker:27 - Order: 12 is cooking by baker number: 1
+2025-03-12 23:29:56 INFO  PizazzStore:54 - Order 8 is ready and stored.
+2025-03-12 23:29:56 INFO  PizazzStore:41 - Order 13 taken by baker.
+2025-03-12 23:29:56 INFO  Baker:27 - Order: 13 is cooking by baker number: 3
+2025-03-12 23:29:57 INFO  PizazzStore:54 - Order 10 is ready and stored.
+2025-03-12 23:29:57 INFO  PizazzStore:41 - Order 14 taken by baker.
+2025-03-12 23:29:57 INFO  Baker:27 - Order: 14 is cooking by baker number: 2
+2025-03-12 23:29:58 INFO  Courier:31 - Courier Artemy Kuleshov delivered order
+2025-03-12 23:29:58 INFO  PizazzStore:70 - Batch of 7 pizzas taken by courier.
+2025-03-12 23:29:58 INFO  Courier:29 - Courier: Artemy Kuleshov is delivering 7 pizzas
+2025-03-12 23:29:58 INFO  PizazzStore:54 - Order 9 is ready and stored.
+2025-03-12 23:29:58 INFO  PizazzStore:41 - Order 15 taken by baker.
+2025-03-12 23:29:58 INFO  Baker:27 - Order: 15 is cooking by baker number: 4
+2025-03-12 23:29:58 INFO  PizazzStore:54 - Order 12 is ready and stored.
+2025-03-12 23:29:58 INFO  PizazzStore:41 - Order 16 taken by baker.
+2025-03-12 23:29:58 INFO  Baker:27 - Order: 16 is cooking by baker number: 1
+2025-03-12 23:29:59 INFO  Courier:31 - Courier Nikita Krainov delivered order
+2025-03-12 23:29:59 INFO  PizazzStore:70 - Batch of 2 pizzas taken by courier.
+2025-03-12 23:29:59 INFO  Courier:29 - Courier: Nikita Krainov is delivering 2 pizzas
+2025-03-12 23:30:00 INFO  Courier:31 - Courier Ochir Khubanov delivered order
+2025-03-12 23:30:00 INFO  PizazzStore:54 - Order 14 is ready and stored.
+2025-03-12 23:30:00 INFO  PizazzStore:41 - Order 17 taken by baker.
+2025-03-12 23:30:00 INFO  Baker:27 - Order: 17 is cooking by baker number: 2
+2025-03-12 23:30:00 INFO  PizazzStore:70 - Batch of 1 pizzas taken by courier.
+2025-03-12 23:30:00 INFO  Courier:29 - Courier: Ochir Khubanov is delivering 1 pizzas
+2025-03-12 23:30:00 INFO  PizazzStore:54 - Order 16 is ready and stored.
+2025-03-12 23:30:00 INFO  PizazzStore:41 - Order 18 taken by baker.
+2025-03-12 23:30:00 INFO  Baker:27 - Order: 18 is cooking by baker number: 1
+2025-03-12 23:30:00 INFO  PizazzStore:54 - Order 13 is ready and stored.
+2025-03-12 23:30:00 INFO  PizazzStore:41 - Order 19 taken by baker.
+2025-03-12 23:30:00 INFO  Baker:27 - Order: 19 is cooking by baker number: 3
+2025-03-12 23:30:02 INFO  PizazzStore:54 - Order 18 is ready and stored.
+2025-03-12 23:30:02 INFO  PizazzStore:41 - Order 20 taken by baker.
+2025-03-12 23:30:02 INFO  Baker:27 - Order: 20 is cooking by baker number: 1
+2025-03-12 23:30:03 INFO  PizazzStore:54 - Order 15 is ready and stored.
+2025-03-12 23:30:03 INFO  PizazzStore:54 - Order 17 is ready and stored.
+2025-03-12 23:30:04 INFO  PizazzStore:54 - Order 19 is ready and stored.
+2025-03-12 23:30:04 INFO  PizazzStore:54 - Order 20 is ready and stored.
+2025-03-12 23:30:06 INFO  Courier:31 - Courier Artemy Kuleshov delivered order
+2025-03-12 23:30:06 INFO  PizazzStore:70 - Batch of 7 pizzas taken by courier.
+2025-03-12 23:30:06 INFO  Courier:29 - Courier: Artemy Kuleshov is delivering 7 pizzas
+2025-03-12 23:30:07 INFO  Courier:31 - Courier Nikita Krainov delivered order
+2025-03-12 23:30:08 INFO  Courier:31 - Courier Ochir Khubanov delivered order
+2025-03-12 23:30:14 INFO  Courier:31 - Courier Artemy Kuleshov delivered order
+2025-03-12 23:30:48 INFO  PizazzStore:78 - Store is no longer accepting orders. Shutting down.
+2025-03-12 23:30:48 INFO  PizazzStore:37 - No more orders to process. Shutting down.
+2025-03-12 23:30:48 INFO  Baker:35 - Baker 1 has finished work.
+2025-03-12 23:30:48 INFO  PizazzStore:63 - No more pizzas to deliver. Shutting down.
+2025-03-12 23:30:48 INFO  Courier:37 - Courier Artemy Kuleshov has finished work.
+2025-03-12 23:30:48 INFO  PizazzStore:63 - No more pizzas to deliver. Shutting down.
+2025-03-12 23:30:48 INFO  PizazzStore:63 - No more pizzas to deliver. Shutting down.
+2025-03-12 23:30:48 INFO  Courier:37 - Courier Ochir Khubanov has finished work.
+2025-03-12 23:30:48 INFO  Courier:37 - Courier Nikita Krainov has finished work.
+2025-03-12 23:30:48 INFO  PizazzStore:37 - No more orders to process. Shutting down.
+2025-03-12 23:30:48 INFO  Baker:35 - Baker 3 has finished work.
+2025-03-12 23:30:48 INFO  PizazzStore:37 - No more orders to process. Shutting down.
+2025-03-12 23:30:48 INFO  Baker:35 - Baker 4 has finished work.
+2025-03-12 23:30:48 INFO  PizazzStore:37 - No more orders to process. Shutting down.
+2025-03-12 23:30:48 INFO  Baker:35 - Baker 2 has finished work.
+2025-03-12 23:30:48 INFO  Pizzeria:66 - Pizzeria closed, bakers and couriers stopped working.

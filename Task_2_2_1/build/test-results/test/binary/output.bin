@@ -1,4 +1,24 @@
-Order: 1 is ready
-Order: 2 is ready
-Order: 1 is ready
-Order: 2 is ready
+’2025-03-12T16:07:49.865839882Z Test worker INFO Starting configuration XmlConfiguration[location=/home/ang7y/IdeaProjects/OOP3/Task_2_2_1/build/resources/main/log4j2.xml, lastModified=2025-03-12T14:08:16.324Z]...
+ß2025-03-12T16:07:49.871281135Z Test worker INFO Start watching for changes to /home/ang7y/IdeaProjects/OOP3/Task_2_2_1/build/resources/main/log4j2.xml every 0 seconds
+“2025-03-12T16:07:49.872000509Z Test worker INFO Configuration XmlConfiguration[location=/home/ang7y/IdeaProjects/OOP3/Task_2_2_1/build/resources/main/log4j2.xml, lastModified=2025-03-12T14:08:16.324Z] started.
+ç2025-03-12T16:07:49.874827582Z Test worker INFO Stopping configuration org.apache.logging.log4j.core.config.DefaultConfiguration@4f0f7849...
+ä2025-03-12T16:07:49.875362849Z Test worker INFO Configuration org.apache.logging.log4j.core.config.DefaultConfiguration@4f0f7849 stopped.
+H2025-03-12 23:07:49 INFO  PizazzStore:28 - Order 1 placed successfully.
+H2025-03-12 23:07:49 INFO  PizazzStore:28 - Order 2 placed successfully.
+H2025-03-12 23:07:49 INFO  PizazzStore:28 - Order 3 placed successfully.
+H2025-03-12 23:07:49 INFO  PizazzStore:28 - Order 4 placed successfully.
+H2025-03-12 23:07:49 INFO  PizazzStore:28 - Order 5 placed successfully.
+C2025-03-12 23:07:49 INFO  PizazzStore:41 - Order 1 taken by baker.
+L2025-03-12 23:07:49 INFO  Baker:27 - Order: 1 is cooking by baker number: 1
+_2025-03-12 23:07:49 INFO  PizazzStore:78 - Store is no longer accepting orders. Shutting down.
+U2025-03-12 23:07:49 INFO  PizazzStore:63 - No more pizzas to deliver. Shutting down.
+U2025-03-12 23:07:49 INFO  PizazzStore:63 - No more pizzas to deliver. Shutting down.
+H2025-03-12 23:07:49 INFO  Courier:37 - Courier Alice has finished work.
+G2025-03-12 23:07:49 INFO  Courier:37 - Courier John has finished work.
+C2025-03-12 23:07:49 INFO  PizazzStore:41 - Order 2 taken by baker.
+L2025-03-12 23:07:49 INFO  Baker:27 - Order: 2 is cooking by baker number: 2
+f2025-03-12 23:07:50 WARN  PizazzStore:50 - Order 1 was not stored because the store is shutting down.
+@2025-03-12 23:07:50 INFO  Baker:35 - Baker 1 has finished work.
+f2025-03-12 23:07:51 WARN  PizazzStore:50 - Order 2 was not stored because the store is shutting down.
+@2025-03-12 23:07:51 INFO  Baker:35 - Baker 2 has finished work.
+U2025-03-12 23:07:59 INFO  PizazzStore:63 - No more pizzas to deliver. Shutting down.

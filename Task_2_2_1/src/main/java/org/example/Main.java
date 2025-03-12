@@ -1,39 +1,30 @@
 package org.example;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        PizazzCfg config = objectMapper.readValue(new File("config.json"), PizazzCfg.class);
-        PizazzStore pizazzStore =  new PizazzStore(config.getStorageCapacity());
-        List<Baker> bakers = new LinkedList<>();
-        List<Courier> couriers = new LinkedList<>();
-        for (int i = 0; i < config.getBakers().length; i++) {
-            Baker baker = new Baker(i+1, config.getBakers()[i], pizazzStore);
-            bakers.add(baker);
-            baker.start();
-        }
-        for (int i = 0; i < config.getCouriers().length; i++) {
-            Courier courier = new Courier(config.getCourierName()[i], config.getCouriers()[i], pizazzStore);
-            couriers.add(courier);
-            courier.start();
-        }
-        for (int i = 1; i < config.getOrderCount(); i++) {
-            pizazzStore.placeOrder(new Order(i));
-        }
-        Thread.sleep(config.getWorkTime() * 1000);
-        pizazzStore.stopAcceptingOrders();
-        for (Baker baker : bakers) {
-            baker.join();
-        }
+    private static final Logger logger = LogManager.getLogger(Main.class);
 
-        for (Courier courier : couriers) {
-            courier.join();
-        }
+    public static void main(String[] args) {
+        logger.info("Starting Pizzeria application...");
 
+        try {
+            // Создаем хранилище
+            PizazzStore pizazzStore = new PizazzStore(10); // Вместимость хранилища можно вынести в конфиг
+
+            // Создаем менеджер пиццерии
+            Pizzeria pizzeria = new Pizzeria(pizazzStore);
+
+            // Инициализируем пиццерию из конфига
+            pizzeria.initializeFromConfig("config.json");
+
+            // Запускаем пиццерию на определенное время (в секундах)
+            pizzeria.stopPizzeria(60); // Время работы можно вынести в конфиг
+        } catch (IOException | InterruptedException e) {
+            logger.error("An error occurred while running the pizzeria: {}", e.getMessage());
+        }
     }
 }

@@ -1,8 +1,8 @@
 {
-  "bakers": [2,3,4,5],
-  "couriers": [5,6,7],
+  "bakers": [1, 2, 3],
+  "couriers": [1, 2],
   "courierName": ["Nikita Krainov", "Ochir Khubanov", "Artemy Kuleshov"],
   "storageCapacity": 10,
-  "orderCount": 20,
-  "workTime": 100
+  "orderCount": 5,
+  "workTime": 60
 }
