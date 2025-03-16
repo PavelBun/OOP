@@ -59,7 +59,6 @@ public class Pizzeria {
         // Прерывание потоков
         threads.forEach(Thread::interrupt);
 
-        // Ожидание завершения
         for (Thread thread : threads) {
             thread.join();
         }

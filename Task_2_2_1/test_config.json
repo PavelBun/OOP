@@ -1,8 +1,0 @@
-{
-  "bakers": [2, 3],
-  "couriers": [5, 5],
-  "courierName": ["Courier-1", "Courier-2"],
-  "storageCapacity": 10,
-  "orderCount": 5,
-  "workTime": 1
-}
