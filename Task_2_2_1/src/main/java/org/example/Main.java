@@ -1,8 +1,10 @@
 package org.example;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Main {
@@ -10,21 +12,17 @@ public class Main {
 
     public static void main(String[] args) {
         logger.info("Starting Pizzeria application...");
-
         try {
-            // Создаем хранилище
-            PizazzStore pizazzStore = new PizazzStore(10); // Вместимость хранилища можно вынести в конфиг
+            ObjectMapper mapper = new ObjectMapper();
+            PizazzCfg config = mapper.readValue(new File("config.json"), PizazzCfg.class);
 
-            // Создаем менеджер пиццерии
-            Pizzeria pizzeria = new Pizzeria(pizazzStore);
+            PizazzStore store = new PizazzStore(config.getStorageCapacity());
+            Pizzeria pizzeria = new Pizzeria(store);
 
-            // Инициализируем пиццерию из конфига
             pizzeria.initializeFromConfig("config.json");
-
-            // Запускаем пиццерию на определенное время (в секундах)
-            pizzeria.stopPizzeria(60); // Время работы можно вынести в конфиг
+            pizzeria.stopPizzeria(config.getWorkTime());
         } catch (IOException | InterruptedException e) {
-            logger.error("An error occurred while running the pizzeria: {}", e.getMessage());
+            logger.error("An error occurred: {}", e.getMessage());
         }
     }
 }

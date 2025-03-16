@@ -11,34 +11,37 @@ import java.util.List;
 
 public class Pizzeria {
     private static final Logger logger = LogManager.getLogger(Pizzeria.class);
-
     private final PizazzStore pizazzStore;
-    private final List<Baker> bakers;
-    private final List<Courier> couriers;
+    private final List<Worker> workers = new LinkedList<>();
+
+    private final List<Thread> threads = new LinkedList<>();
 
     public Pizzeria(PizazzStore pizazzStore) {
         this.pizazzStore = pizazzStore;
-        this.bakers = new LinkedList<>();
-        this.couriers = new LinkedList<>();
     }
 
     public void initializeFromConfig(String configFilePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         PizazzCfg config = objectMapper.readValue(new File(configFilePath), PizazzCfg.class);
 
-        // Создаем и запускаем пекарей
+        // Создаем пекарей
         for (int i = 0; i < config.getBakers().length; i++) {
-            Baker baker = new Baker(i + 1, config.getBakers()[i], pizazzStore);
-            bakers.add(baker);
-            baker.start();
+            Worker baker = new Baker(i + 1, config.getBakers()[i], pizazzStore);
+            workers.add(baker);
+            Thread bakerThread = new Thread(baker);
+            threads.add(bakerThread);
+            bakerThread.start();
         }
 
-        // Создаем и запускаем курьеров
+        // Создаем курьеров
         for (int i = 0; i < config.getCouriers().length; i++) {
-            Courier courier = new Courier(config.getCourierName()[i], config.getCouriers()[i], pizazzStore);
-            couriers.add(courier);
-            courier.start();
+            Worker courier = new Courier(config.getCourierName()[i], config.getCouriers()[i], pizazzStore);
+            workers.add(courier);
+            Thread courierThread = new Thread(courier);
+            threads.add(courierThread);
+            courierThread.start();
         }
+
 
         // Размещаем заказы
         for (int i = 1; i <= config.getOrderCount(); i++) {
@@ -47,22 +50,21 @@ public class Pizzeria {
     }
 
     public void stopPizzeria(int workTime) throws InterruptedException {
-        // Ждем завершения рабочего времени
-        Thread.sleep(workTime * 800);
-
-        // Останавливаем прием заказов и завершаем работу
+        Thread.sleep(workTime * 1000L);
         pizazzStore.stopAcceptingOrders();
 
-        // Ждем завершения всех пекарей
-        for (Baker baker : bakers) {
-            baker.join();
+        // Остановка всех работников
+        workers.forEach(Worker::stop);
+
+        // Прерывание потоков
+        threads.forEach(Thread::interrupt);
+
+        // Ожидание завершения
+        for (Thread thread : threads) {
+            thread.join();
         }
 
-        // Ждем завершения всех курьеров
-        for (Courier courier : couriers) {
-            courier.join();
-        }
 
-        logger.info("Pizzeria closed, bakers and couriers stopped working.");
+        logger.info("Pizzeria closed, all workers stopped.");
     }
 }

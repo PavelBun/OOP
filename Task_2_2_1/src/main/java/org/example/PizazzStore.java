@@ -9,8 +9,8 @@ import java.util.List;
 public class PizazzStore {
     private static final Logger logger = LogManager.getLogger(PizazzStore.class);
 
-    private final BlockingQueue orders = new BlockingQueue();
-    private final BlockingQueue storage = new BlockingQueue();
+    private final BlockingQueue<Order> orders = new BlockingQueue<>();
+    private final BlockingQueue<Order> storage = new BlockingQueue<>();
     private final int capacity;
     private boolean acceptingOrders = true;
     private boolean isShutdown = false;

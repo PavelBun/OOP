@@ -5,12 +5,13 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class Courier extends Thread {
+public class Courier implements Worker{
     private static final Logger logger = LogManager.getLogger(Courier.class);
 
     String name;
     int trunkCapacity;
     private PizazzStore store;
+    private volatile boolean running = true;
 
     public Courier(String name, int trunkCapacity, PizazzStore store) {
         this.name = name;
@@ -35,5 +36,10 @@ public class Courier extends Thread {
             Thread.currentThread().interrupt();
         }
         logger.info("Courier {} has finished work.", name);
+    }
+
+    @Override
+    public void stop() {
+        running = false;
     }
 }

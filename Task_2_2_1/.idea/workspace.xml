@@ -5,7 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f74948ac-5409-4730-b674-353811829615" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Worker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/Baker.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/Baker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/Courier.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/Courier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/org/example/PizazzStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/org/example/PizazzStore.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/org/example/PizazzStoreTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/org/example/PizazzStoreTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/jacoco/test.exec" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacoco/test.exec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/pizzeria.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/pizzeria.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Baker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Baker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BlockingQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/BlockingQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Courier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Courier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/PizazzStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/PizazzStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Pizzeria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Pizzeria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/PizazzStoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/PizazzStoreTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +64,7 @@
       <list>
         <option value="XML Properties File" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -63,6 +86,8 @@
     "Gradle.PizazzStoreTest.testAllOrdersAreDelivered.executor": "Run",
     "Gradle.PizazzStoreTest.testBakersAndCouriersWorkCorrectly.executor": "Run",
     "Gradle.PizazzStoreTest.testConfigWithMismatchedCourierArrays.executor": "Run",
+    "Gradle.PizazzStoreTest.testMainExecutionWithLogs.executor": "Run",
+    "Gradle.PizazzStoreTest.testStarPizzeria.executor": "Run",
     "Gradle.PizazzStoreTest.testStopAcceptingOrders.executor": "Run",
     "Gradle.Task_2_2_1 [:org.example.Main.main()].executor": "Run",
     "Gradle.Task_2_2_1 [dependencies].executor": "Run",
@@ -70,7 +95,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "Task__2__2__1",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/ang7y/IdeaProjects/Task_2_2_1"
+    "last_opened_file_path": "/home/ang7y/IdeaProjects/OOP3/Task_2_2_1"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -78,7 +103,7 @@
       <recent name="$PROJECT_DIR$/src/main/java/resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Gradle.PizazzStoreTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
       <module name="Task_2_2_1.main" />
@@ -116,30 +141,6 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="PizazzStoreTest.testAllOrdersAreDelivered" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;org.example.PizazzStoreTest.testAllOrdersAreDelivered&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
     <configuration name="PizazzStoreTest.testBakersAndCouriersWorkCorrectly" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -164,7 +165,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="PizazzStoreTest.testConfigWithMismatchedCourierArrays" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PizazzStoreTest.testMainExecutionWithLogs" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -177,7 +178,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;org.example.PizazzStoreTest.testConfigWithMismatchedCourierArrays&quot;" />
+            <option value="&quot;org.example.PizazzStoreTest.testMainExecutionWithLogs&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="PizazzStoreTest.testStarPizzeria" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.example.PizazzStoreTest.testStarPizzeria&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -190,18 +215,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
-      <item itemvalue="Gradle.PizazzStoreTest.testAllOrdersAreDelivered" />
+      <item itemvalue="Gradle.PizazzStoreTest.testMainExecutionWithLogs" />
+      <item itemvalue="Gradle.PizazzStoreTest.testStarPizzeria" />
       <item itemvalue="Gradle.PizazzStoreTest.testBakersAndCouriersWorkCorrectly" />
-      <item itemvalue="Gradle.PizazzStoreTest.testConfigWithMismatchedCourierArrays" />
       <item itemvalue="Gradle.PizazzStoreTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.PizazzStoreTest" />
+        <item itemvalue="Gradle.PizazzStoreTest.testMainExecutionWithLogs" />
+        <item itemvalue="Gradle.PizazzStoreTest.testStarPizzeria" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.PizazzStoreTest.testBakersAndCouriersWorkCorrectly" />
-        <item itemvalue="Gradle.PizazzStoreTest.testAllOrdersAreDelivered" />
-        <item itemvalue="Gradle.PizazzStoreTest" />
-        <item itemvalue="Gradle.PizazzStoreTest.testConfigWithMismatchedCourierArrays" />
       </list>
     </recent_temporary>
   </component>
@@ -221,13 +246,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>7</line>
+          <line>9</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/org/example/PizazzStoreTest.java</url>
-          <line>99</line>
+          <line>180</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/org/example/PizazzStoreTest.java</url>
+          <line>148</line>
+          <properties class="org.example.PizazzStoreTest" method="testMainExecutionWithLogs">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
