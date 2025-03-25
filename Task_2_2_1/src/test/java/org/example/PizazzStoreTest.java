@@ -1,6 +1,7 @@
 package org.example;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,12 +14,14 @@ import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.apache.logging.log4j.core.appender.WriterAppender;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.io.IOException;
 import java.io.StringWriter;
 
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class PizazzStoreTest {
+
     @Test
     void testOrderPlacement() {
         PizazzStore pizzeria = new PizazzStore(5);
@@ -62,7 +65,6 @@ class PizazzStoreTest {
 
         assertEquals(2, pickedUpOrders.size());
     }
-
     @Test
     void testStopAcceptingOrders() throws InterruptedException {
         PizazzStore pizzeria = new PizazzStore(5);
@@ -147,7 +149,6 @@ class PizazzStoreTest {
     }
     @Test
     void testMainExecutionWithLogs() throws IOException, InterruptedException {
-        // Настройка перехвата логов
         LoggerContext context = (LoggerContext) LogManager.getContext(false);
         PatternLayout layout = PatternLayout.newBuilder()
                 .withPattern("%msg%n")
@@ -164,24 +165,38 @@ class PizazzStoreTest {
         context.getRootLogger().addAppender(appender);
         context.updateLoggers();
 
-        // Запуск main
-        Main.main(new String[]{});
+        try {
+            // Убедитесь, что config.json содержит orderCount: 20
+            Main.main(new String[]{});
 
-        // Проверка логов
-        String logs = writer.toString();
-        long placedOrders = logs.lines().filter(line -> line.contains("placed successfully")).count();
-        long cookedOrders = logs.lines().filter(line -> line.contains("is cooking")).count();
-        long deliveredPizzas = logs.lines()
-                .filter(line -> line.contains("delivering") && line.contains("pizzas"))
-                .mapToLong(line -> {
-                    // Извлечение числа из строки вида "Courier: Nikita is delivering 3 pizzas"
-                    String[] parts = line.split(" ");
-                    return Long.parseLong(parts[parts.length - 2]); // индекс числа
-                })
-                .sum();
-        assertEquals(20, placedOrders, "All 20 orders should be placed");
-        assertEquals(20, cookedOrders, "All 20 orders should be cooked");
-        assertEquals(20, deliveredPizzas, "All 20 orders should be delivered");
+            // Увеличьте время ожидания для завершения всех потоков
+            Thread.sleep(15000);
+
+            String logs = writer.toString();
+            long placedOrders = logs.lines()
+                    .filter(line -> line.contains("placed successfully"))
+                    .count();
+
+            long cookedOrders = logs.lines()
+                    .filter(line -> line.contains("is cooking"))
+                    .count();
+
+            long deliveredPizzas = logs.lines()
+                    .filter(line -> line.contains("delivering") && line.contains("pizzas"))
+                    .mapToLong(line -> {
+                        String[] parts = line.split(" ");
+                        return Long.parseLong(parts[parts.length - 2]);
+                    })
+                    .sum();
+
+            assertEquals(20, placedOrders, "Размещено заказов");
+            assertEquals(20, cookedOrders, "Приготовлено заказов");
+            assertEquals(20, deliveredPizzas, "Доставлено пицц");
+        } finally {
+            appender.stop();
+            context.getRootLogger().removeAppender(appender);
+            context.updateLoggers();
+        }
     }
     @Test
     void testPlaceOrderDuringWork() throws IOException, InterruptedException {
@@ -210,29 +225,35 @@ class PizazzStoreTest {
             Pizzeria pizzeria = new Pizzeria(store);
             pizzeria.initializeFromConfig("config.json");
             // add order
-            store.placeOrder(new Order(config.getOrderCount()+1));
+            store.placeOrder(new Order(config.getOrderCount() + 1));
             Thread.sleep(7000);
-            // stop
             pizzeria.stopPizzeria(config.getWorkTime());
 
-        } catch (IOException | InterruptedException e) {
+
+            // Проверка логов
+            String logs = writer.toString();
+            long placedOrders = logs.lines().filter(line -> line.contains("placed successfully")).count();
+            long cookedOrders = logs.lines().filter(line -> line.contains("is cooking")).count();
+            long deliveredPizzas = logs.lines()
+                    .filter(line -> line.contains("delivering") && line.contains("pizzas"))
+                    .mapToLong(line -> {
+                        // Извлечение числа
+                        String[] parts = line.split(" ");
+                        return Long.parseLong(parts[parts.length - 2]); // индекс числа
+                    })
+                    .sum();
+            assertEquals(21, placedOrders, "All 21 orders should be placed");
+            assertEquals(21, cookedOrders, "All 21 orders should be cooked");
+            assertEquals(21, deliveredPizzas, "All 21 orders should be delivered");
+        }
+        catch (IOException | InterruptedException e) {
             logger.error("An error occurred: {}", e.getMessage());
         }
-        // Проверка логов
-        String logs = writer.toString();
-        long placedOrders = logs.lines().filter(line -> line.contains("placed successfully")).count();
-        long cookedOrders = logs.lines().filter(line -> line.contains("is cooking")).count();
-        long deliveredPizzas = logs.lines()
-                .filter(line -> line.contains("delivering") && line.contains("pizzas"))
-                .mapToLong(line -> {
-                    // Извлечение числа
-                    String[] parts = line.split(" ");
-                    return Long.parseLong(parts[parts.length - 2]); // индекс числа
-                })
-                .sum();
-        assertEquals(21, placedOrders, "All 21 orders should be placed");
-        assertEquals(21, cookedOrders, "All 21 orders should be cooked");
-        assertEquals(21, deliveredPizzas, "All 21 orders should be delivered");
+        finally {
+            appender.stop();
+            context.getRootLogger().removeAppender(appender);
+            context.updateLoggers();
+        }
     }
 
 }
