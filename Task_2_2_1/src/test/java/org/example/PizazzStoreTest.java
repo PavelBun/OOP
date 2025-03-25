@@ -183,4 +183,56 @@ class PizazzStoreTest {
         assertEquals(20, cookedOrders, "All 20 orders should be cooked");
         assertEquals(20, deliveredPizzas, "All 20 orders should be delivered");
     }
+    @Test
+    void testPlaceOrderDuringWork() throws IOException, InterruptedException {
+        final Logger logger = LogManager.getLogger(PizazzStoreTest.class);
+        LoggerContext context = (LoggerContext) LogManager.getContext(false);
+        PatternLayout layout = PatternLayout.newBuilder()
+                .withPattern("%msg%n")
+                .build();
+
+        StringWriter writer = new StringWriter();
+        WriterAppender appender = WriterAppender.newBuilder()
+                .setName("TestAppender")
+                .setLayout(layout)
+                .setTarget(writer)
+                .build();
+
+        appender.start();
+        context.getRootLogger().addAppender(appender);
+        context.updateLoggers();
+        logger.info("Starting Pizzeria application...");
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            PizazzCfg config = mapper.readValue(new File("config.json"), PizazzCfg.class);
+
+            PizazzStore store = new PizazzStore(config.getStorageCapacity());
+            Pizzeria pizzeria = new Pizzeria(store);
+            pizzeria.initializeFromConfig("config.json");
+            // add order
+            store.placeOrder(new Order(config.getOrderCount()+1));
+            Thread.sleep(7000);
+            // stop
+            pizzeria.stopPizzeria(config.getWorkTime());
+
+        } catch (IOException | InterruptedException e) {
+            logger.error("An error occurred: {}", e.getMessage());
+        }
+        // Проверка логов
+        String logs = writer.toString();
+        long placedOrders = logs.lines().filter(line -> line.contains("placed successfully")).count();
+        long cookedOrders = logs.lines().filter(line -> line.contains("is cooking")).count();
+        long deliveredPizzas = logs.lines()
+                .filter(line -> line.contains("delivering") && line.contains("pizzas"))
+                .mapToLong(line -> {
+                    // Извлечение числа
+                    String[] parts = line.split(" ");
+                    return Long.parseLong(parts[parts.length - 2]); // индекс числа
+                })
+                .sum();
+        assertEquals(21, placedOrders, "All 21 orders should be placed");
+        assertEquals(21, cookedOrders, "All 21 orders should be cooked");
+        assertEquals(21, deliveredPizzas, "All 21 orders should be delivered");
+    }
+
 }
