@@ -53,7 +53,7 @@ dependencies {
         exclude(group: 'org.openjfx')
         exclude(group: 'org.jetbrains.kotlin')
     }
-
+    testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
