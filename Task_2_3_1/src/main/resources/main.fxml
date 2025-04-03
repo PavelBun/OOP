@@ -2,9 +2,8 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.StackPane?>
 
-<!-- Удалите onKeyPressed="#handleKeyPress" из StackPane -->
 <StackPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            fx:controller="org.example.GameController">
-    <Canvas fx:id="gameCanvas" width="400" height="400" />
+    <Canvas fx:id="gameCanvas" width="340" height="300" />
 </StackPane>
