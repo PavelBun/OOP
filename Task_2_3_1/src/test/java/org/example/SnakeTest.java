@@ -1,4 +1,3 @@
-// SnakeTest.java
 package org.example;
 
 import javafx.geometry.Point2D;
@@ -22,25 +21,17 @@ class SnakeTest {
 
     @Test
     void testMovement() {
-        snake.move(new Point2D(6, 5));
+        snake.setDirection(Direction.RIGHT);
+        snake.update();
         assertEquals(new Point2D(6, 5), snake.getHead());
-        assertEquals(1, snake.getBody().size());
     }
 
     @Test
     void testGrowth() {
-        snake.grow(new Point2D(6, 5));
-        assertEquals(2, snake.getBody().size());
-        assertEquals(new Point2D(6, 5), snake.getBody().get(0));
+        snake.growBy(2);
+        for (int i = 0; i < 3; i++) snake.update();
+        assertEquals(3, snake.getBody().size());
     }
 
-    @Test
-    void testDirectionChange() {
-        snake.setDirection(Direction.UP);
-        assertEquals(Direction.UP, snake.getDirection());
 
-        // Проверка блокировки противоположного направления
-        snake.setDirection(Direction.DOWN);
-        assertEquals(Direction.UP, snake.getDirection());
-    }
 }

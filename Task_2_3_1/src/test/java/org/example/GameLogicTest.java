@@ -1,4 +1,3 @@
-// GameLogicTest.java
 package org.example;
 
 import javafx.geometry.Point2D;
@@ -11,7 +10,7 @@ class GameLogicTest {
 
     @BeforeEach
     void setUp() {
-        gameLogic = new GameLogic(20, 20, 10);
+        gameLogic = new GameLogic(20, 20, 10, 1);
     }
 
     @Test
@@ -22,20 +21,31 @@ class GameLogicTest {
 
     @Test
     void testCollisionWithWall() {
-        // Перемещаем змейку к границе
-        gameLogic.getSnake().move(new Point2D(19, 10));
-        gameLogic.update();
+        // Двигаем змейку до границы
+        for (int i = 0; i < 20; i++) {
+            gameLogic.getSnake().setDirection(Direction.RIGHT);
+            gameLogic.update();
+        }
         assertTrue(gameLogic.isGameOver());
     }
-
 
     @Test
     void testSelfCollision() {
         Snake snake = gameLogic.getSnake();
-        snake.grow(new Point2D(11, 10));
-        snake.grow(new Point2D(11, 11));
+
+        // Форсируем рост змейки
+        snake.growBy(4);
+
+        // Создаем петлю
         snake.setDirection(Direction.UP);
+        gameLogic.update(); // Движение вверх
+        snake.setDirection(Direction.LEFT);
+        gameLogic.update(); // Движение влево
+        snake.setDirection(Direction.DOWN);
         gameLogic.update();
-        assertTrue(gameLogic.isGameOver());
+        snake.setDirection(Direction.RIGHT);
+        gameLogic.update();
+
+        assertTrue(gameLogic.isGameOver(), "Змейка должна столкнуться сама с собой");
     }
 }

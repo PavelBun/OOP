@@ -1,4 +1,3 @@
-// FoodManagerTest.java
 package org.example;
 
 import javafx.geometry.Point2D;
@@ -19,18 +18,22 @@ class FoodManagerTest {
     @Test
     void testFoodGeneration() {
         foodManager.generateFood(snake);
-        assertEquals(1, foodManager.getFood().size());
+        assertNotNull(foodManager.getCurrentFood());
 
-        Point2D food = foodManager.getFood().get(0);
-        assertFalse(snake.getBody().contains(food));
+        Point2D foodPos = foodManager.getCurrentFood().position();
+        assertFalse(snake.getBody().contains(foodPos));
     }
 
     @Test
     void testFoodConsumption() {
         foodManager.generateFood(snake);
-        Point2D food = foodManager.getFood().get(0);
+        Point2D foodPos = foodManager.getCurrentFood().position();
 
-        assertTrue(foodManager.checkFoodConsumption(food));
-        assertEquals(0, foodManager.getFood().size());
+        // Корректное потребление
+        assertTrue(foodManager.checkFoodConsumption(foodPos));
+        assertNull(foodManager.getCurrentFood());
+
+        // Попытка потребления несуществующей еды
+        assertFalse(foodManager.checkFoodConsumption(new Point2D(0, 0)));
     }
 }

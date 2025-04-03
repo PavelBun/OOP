@@ -34,6 +34,13 @@ public class FoodManager {
     public Food getCurrentFood() {
         return currentFood;
     }
+    public boolean checkFoodConsumption(Point2D headPosition) {
+        if (currentFood != null && currentFood.position().equals(headPosition)) {
+            currentFood = null;
+            return true;
+        }
+        return false;
+    }
 
     public record Food(Point2D position, FruitType type) {}
 }
