@@ -14,6 +14,7 @@ import javafx.geometry.Point2D;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class GameController {
     @FXML private Canvas gameCanvas;
@@ -22,15 +23,19 @@ public class GameController {
     private AnimationTimer gameLoop;
     private Image foodImage;
     private Image backgroundImage;
-
+    private Image headImage;
+    private Image tailImage;
+    private static final int CELL_SIZE = 20; // Размер клетки
+    private static final int BOARD_WIDTH = 17; // Ширина поля в клетках
+    private static final int BOARD_HEIGHT = 15;
     @FXML
     public void initialize() {
         backgroundImage = new Image(getClass().getResourceAsStream("/images/grass.png"));
         foodImage = new Image(getClass().getResourceAsStream("/images/apple.png"));
-
+        headImage = new Image(getClass().getResourceAsStream("/images/snake_head.png"));
+        tailImage = new Image(getClass().getResourceAsStream("/images/snake_tail.png"));
         gc = gameCanvas.getGraphicsContext2D();
-        gameLogic = new GameLogic(20, 20, 10);
-
+        gameLogic = new GameLogic(BOARD_WIDTH, BOARD_HEIGHT, BOARD_WIDTH * BOARD_HEIGHT);
         gameCanvas.setFocusTraversable(true);
         gameCanvas.requestFocus();
 
@@ -45,7 +50,7 @@ public class GameController {
 
             @Override
             public void handle(long now) {
-                if (now - lastUpdate >= 300_000_000) { // скорость змейки
+                if (now - lastUpdate >= 150_000_000) { // скорость змейки
                     update();
                     render();
                     lastUpdate = now;
@@ -61,24 +66,40 @@ public class GameController {
         gc.clearRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         gc.drawImage(backgroundImage, 0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
 
-        // Проверяем, что змейка обновляется
-        System.out.println("Rendering snake at:");
+        List<Point2D> snakeBody = gameLogic.getSnake().getBody();
 
-        // В методе render()
-        gc.setFill(Color.LIME);
-        for (Point2D segment : gameLogic.getSnake().getBody()) {
-            gc.fillRoundRect(
-                    segment.getX() * 20 + 1,
-                    segment.getY() * 20 + 1,
-                    18, 18, 5, 5
+        if (snakeBody.isEmpty()) return;
+
+        // Рисуем тело змейки (без головы)
+
+        for (int i = 1; i < snakeBody.size(); i++) {
+            Point2D segment = snakeBody.get(i);
+            gc.drawImage(tailImage,
+                    segment.getX() * CELL_SIZE,
+                    segment.getY() * CELL_SIZE,
+                    CELL_SIZE,
+                    CELL_SIZE
             );
         }
 
-        gameLogic.getFoodManager().getFood().forEach(food ->
-                gc.drawImage(foodImage, food.getX() * 20, food.getY() * 20, 20, 20)
+        // Рисуем голову змейки отдельно
+        Point2D head = snakeBody.get(0);
+        gc.drawImage(headImage,
+                head.getX() * CELL_SIZE,
+                head.getY() * CELL_SIZE,
+                CELL_SIZE,
+                CELL_SIZE
         );
 
-        System.out.println("Rendered frame!");
+        // Рисуем яблоки
+        gameLogic.getFoodManager().getFood().forEach(food ->
+                gc.drawImage(foodImage,
+                        food.getX() * CELL_SIZE,
+                        food.getY() * CELL_SIZE,
+                        CELL_SIZE,
+                        CELL_SIZE
+                )
+        );
     }
     private void showGameOver() {
         try {
@@ -131,6 +152,6 @@ public class GameController {
         if (newDirection != null) {
             gameLogic.getSnake().setDirection(newDirection);
         }
-        event.consume(); // Предотвращаем дублирование событий
+        event.consume();
     }
 }
