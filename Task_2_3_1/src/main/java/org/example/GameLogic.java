@@ -23,35 +23,28 @@ public class GameLogic {
     }
 
     public void update() {
-        Point2D newHead = calculateNewHead();
-        if (isCollision(newHead)) {
+        // Обновляем направление змейки
+        snake.update();
+        Point2D newHead = snake.getHead();
+
+        // Проверка коллизий
+        boolean collision = newHead.getX() < 0
+                || newHead.getX() >= boardWidth
+                || newHead.getY() < 0
+                || newHead.getY() >= boardHeight
+                || snake.getBody().subList(1, snake.getBody().size()).contains(newHead);
+
+        if (collision) {
             gameOver = true;
-            // Обработка столкновения
             return;
         }
+
+        // Обработка поедания еды
         if (foodManager.checkFoodConsumption(newHead)) {
             snake.grow(newHead);
             score += 10;
             foodManager.generateFood(snake);
-        } else {
-            snake.move(newHead);
         }
-    }
-
-    private Point2D calculateNewHead() {
-        Point2D head = snake.getHead();
-        return switch (snake.getDirection()) {
-            case UP -> new Point2D(head.getX(), head.getY() - 1);
-            case DOWN -> new Point2D(head.getX(), head.getY() + 1);
-            case LEFT -> new Point2D(head.getX() - 1, head.getY());
-            case RIGHT -> new Point2D(head.getX() + 1, head.getY());
-        };
-    }
-
-    private boolean isCollision(Point2D newHead) {
-        return newHead.getX() < 0 || newHead.getX() >= boardWidth ||
-                newHead.getY() < 0 || newHead.getY() >= boardHeight ||
-                snake.getBody().subList(1, snake.getBody().size()).contains(newHead); // Исключаем голову из проверки
     }
 
     public boolean isGameOver() {
@@ -69,7 +62,8 @@ public class GameLogic {
     public FoodManager getFoodManager() {
         return foodManager;
     }
-    public int getScore(){
+
+    public int getScore() {
         return score;
     }
 }
