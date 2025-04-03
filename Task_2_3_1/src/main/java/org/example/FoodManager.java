@@ -1,39 +1,39 @@
 package org.example;
 
 import javafx.geometry.Point2D;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class FoodManager {
-    private List<Point2D> food;
-    private int boardWidth;
-    private int boardHeight;
-    private Random random;
+    private static final Random random = new Random();
+    private Food currentFood;
+    private final int boardWidth;
+    private final int boardHeight;
 
     public FoodManager(int boardWidth, int boardHeight) {
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
-        this.food = new ArrayList<>();
-        this.random = new Random();
     }
 
     public void generateFood(Snake snake) {
-        Point2D newFood;
+        List<Point2D> forbidden = new ArrayList<>(snake.getBody());
+        if (currentFood != null) forbidden.add(currentFood.position());
+
+        Point2D newPos;
         do {
-            newFood = new Point2D(
+            newPos = new Point2D(
                     random.nextInt(boardWidth),
                     random.nextInt(boardHeight)
             );
-        } while (snake.getBody().contains(newFood) || food.contains(newFood));
-        food.add(newFood);
+        } while (forbidden.contains(newPos));
+
+        // Случайный выбор типа фрукта
+        FruitType[] types = FruitType.values();
+        currentFood = new Food(newPos, types[random.nextInt(types.length)]);
     }
 
-    public List<Point2D> getFood() {
-        return food;
+    public Food getCurrentFood() {
+        return currentFood;
     }
 
-    public boolean checkFoodConsumption(Point2D head) {
-        return food.remove(head);
-    }
+    public record Food(Point2D position, FruitType type) {}
 }

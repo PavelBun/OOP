@@ -7,7 +7,8 @@ import javafx.geometry.Point2D;
 public class Snake {
     private List<Point2D> body;
     private Direction currentDirection;
-    private Direction nextDirection; // Буфер для следующего направления
+    private Direction nextDirection;
+    private int pendingGrowth;
 
     public Snake(Point2D startPosition) {
         body = new ArrayList<>();
@@ -24,10 +25,16 @@ public class Snake {
     }
 
     public void update() {
-        currentDirection = nextDirection; // Применяем направление только здесь
+        currentDirection = nextDirection;
         Point2D newHead = calculateNewHead();
         body.add(0, newHead);
-        body.remove(body.size() - 1);
+
+        // Добавляем новые сегменты в хвост
+        if (pendingGrowth > 0) {
+            pendingGrowth--;
+        } else {
+            body.remove(body.size() - 1);
+        }
     }
 
     private Point2D calculateNewHead() {
@@ -39,6 +46,10 @@ public class Snake {
             case RIGHT -> new Point2D(head.getX() + 1, head.getY());
         };
     }
+    public void growBy(int segments) {
+        this.pendingGrowth += segments; // Накопление сегментов для роста
+    }
+
 
     // Геттеры
     public Direction getDirection() {

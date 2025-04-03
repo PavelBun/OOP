@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.StartMenuController"
+      alignment="CENTER"
+      spacing="20"
+      style="-fx-background-color: #f0f0f0; -fx-padding: 20;">
+
+    <Text text="Змейка" style="-fx-font-size: 32; -fx-font-weight: bold;"/>
+    <Button text="Начать игру" onAction="#startGame" style="-fx-font-size: 16; -fx-min-width: 150;"/>
+    <Button text="Выйти" onAction="#exitGame" style="-fx-font-size: 16; -fx-min-width: 150;"/>
+</VBox>

@@ -13,20 +13,41 @@ public class GameOverController {
     @FXML private Text scoreText;
     private Stage stage;
     private int score;
+    private int currentLevel;
+    private boolean isVictory;
 
-    public void initialize(Stage stage, int score) {
+    public void initialize(Stage stage, int score, int level, boolean isVictory) {
         this.stage = stage;
         this.score = score;
-        gameOverText.setText("Вы проиграли!");
+        this.currentLevel = level;
+        this.isVictory = isVictory;
+
+        gameOverText.setText(isVictory ? "Победа!" : "Вы проиграли!");
         scoreText.setText("Счёт: " + score);
     }
 
     @FXML
     private void restartGame() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/main.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main.fxml"));
+            Parent root = loader.load();
+            GameController gameController = loader.getController();
+            gameController.setLevel(currentLevel);
+
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void returnToMainMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/start_menu.fxml"));
+            Parent root = loader.load();
+
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
