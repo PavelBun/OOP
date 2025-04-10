@@ -103,9 +103,7 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,int,int)" class="member-name-link">GameLogic</a><wbr>(int&nbsp;boardWidth,
- int&nbsp;boardHeight,
- int&nbsp;targetLength,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">GameLogic</a><wbr>(int&nbsp;targetLength,
  int&nbsp;level)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
@@ -164,12 +162,15 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(int,int,int,int)">
+<section class="detail" id="&lt;init&gt;(int,int)">
 <h3>GameLogic</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GameLogic</span><wbr><span class="parameters">(int&nbsp;boardWidth,
- int&nbsp;boardHeight,
- int&nbsp;targetLength,
- int&nbsp;level)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GameLogic</span><wbr><span class="parameters">(int&nbsp;targetLength,
+ int&nbsp;level)</span>
+          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<dl class="notes">
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -184,12 +185,6 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="update()">
 <h3>update</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">update</span>()</div>
-</section>
-</li>
-<li>
-<section class="detail" id="getUpdateInterval()">
-<h3>getUpdateInterval</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getUpdateInterval</span>()</div>
 </section>
 </li>
 <li>
@@ -226,6 +221,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getScore()">
 <h3>getScore</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getScore</span>()</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getUpdateInterval()">
+<h3>getUpdateInterval</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getUpdateInterval</span>()</div>
 </section>
 </li>
 </ul>
