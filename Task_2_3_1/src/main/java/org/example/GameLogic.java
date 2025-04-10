@@ -6,33 +6,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameLogic {
+    private static final int BOARD_WIDTH = 17; // Фиксированные размеры
+    private static final int BOARD_HEIGHT = 15;
+    private static final long BASE_INTERVAL_NS = 200_000_000;
+    private long updateInterval = BASE_INTERVAL_NS;
     private Snake snake;
     private FoodManager foodManager;
-    private int boardWidth;
-    private int boardHeight;
     private int score;
     private int targetLength;
     private boolean gameOver;
-    private List<Point2D> obstacles; // Список препятствий
+    private List<Point2D> obstacles;
     private int currentLevel;
     private long speedEffectEndTime = 0;
-    private long updateInterval = 150_000_000;
-    private long baseUpdateInterval = 150_000_000;
-    // Начальная скорость
-    public GameLogic(int boardWidth, int boardHeight, int targetLength, int level) {
-        this.boardWidth = boardWidth;
-        this.boardHeight = boardHeight;
-        this.targetLength = targetLength;
-        snake = new Snake(new Point2D(boardWidth / 2, boardHeight / 2));
-        foodManager = new FoodManager(boardWidth, boardHeight);
+    private long baseUpdateInterval = 200_000_000;
+
+    public GameLogic(int targetLength, int level) throws Exception {
+        LevelConfig config = LevelLoader.loadLevel(level);
+        this.targetLength = config.getTargetLength();
+        snake = new Snake(new Point2D(BOARD_WIDTH / 2, BOARD_HEIGHT / 2));
+        foodManager = new FoodManager(BOARD_WIDTH, BOARD_HEIGHT);
         foodManager.generateFood(snake);
         score = 0;
         gameOver = false;
         this.currentLevel = level;
-        this.obstacles = new ArrayList<>();
-        if (level == 2) {
-            generateObstacles();
-        }
+        this.obstacles = new ArrayList<>(config.getObstacles());
     }
 
     public void update() {
@@ -65,22 +62,13 @@ public class GameLogic {
             updateInterval = baseUpdateInterval;
         }
     }
-    public long getUpdateInterval() {
-        return updateInterval;
-    }
-    private void generateObstacles() {
-        // Пример препятствий в пределах доски 17x15
-        obstacles.add(new Point2D(5, 5));
-        obstacles.add(new Point2D(10, 7));
-        obstacles.add(new Point2D(15, 10)); // X=15 (допустимо при ширине 17)
-    }
+
     private boolean isCollision(Point2D newHead) {
-        return
-                // Проверка границ и тела змейки
-                newHead.getX() < 0 || newHead.getX() >= boardWidth ||
-                        newHead.getY() < 0 || newHead.getY() >= boardHeight ||
-                        snake.getBody().subList(1, snake.getBody().size()).contains(newHead) ||
-                        obstacles.contains(newHead); // Проверка препятствий
+        boolean outOfBounds = newHead.getX() < 0 || newHead.getX() >= BOARD_WIDTH
+                || newHead.getY() < 0 || newHead.getY() >= BOARD_HEIGHT;
+        boolean selfCollision = snake.getBody().subList(1, snake.getBody().size()).contains(newHead);
+        boolean obstacleCollision = obstacles.contains(newHead);
+        return outOfBounds || selfCollision || obstacleCollision;
     }
 
     public List<Point2D> getObstacles() {
@@ -105,5 +93,9 @@ public class GameLogic {
 
     public int getScore() {
         return score;
+    }
+
+    public long getUpdateInterval() {
+        return updateInterval;
     }
 }

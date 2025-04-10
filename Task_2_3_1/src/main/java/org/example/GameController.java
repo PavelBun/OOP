@@ -1,5 +1,6 @@
 package org.example;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,19 +37,56 @@ public class GameController {
     @FXML private Text startText;
     private boolean gameStarted = false;
     private Map<FruitType, Image> fruitImages = new HashMap<>();
+    private GameThread gameThread;
+    private int levelId;
+
+
+
+
     // Установка уровня из меню выбора
-    public void setLevel(int level) {
-        this.currentLevel = level;
-        if (level == 2) {
-            gameLogic = new GameLogic(BOARD_WIDTH, BOARD_HEIGHT, BOARD_WIDTH * BOARD_HEIGHT - 3, currentLevel);
-        }
-        if (level == 1){
-            gameLogic = new GameLogic(BOARD_WIDTH, BOARD_HEIGHT, BOARD_WIDTH * BOARD_HEIGHT, currentLevel);
+    public void setLevel(int levelId) {
+        try {
+            gameLogic = new GameLogic(BOARD_WIDTH * BOARD_HEIGHT, levelId);
+            currentLevel = levelId;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load level", e);
         }
     }
 
+
+    // Удаляем AnimationTimer и добавляем методы для управления потоком
+    public void startGameLoop() {
+        gameThread = new GameThread(this, gameLogic.getUpdateInterval());
+        gameThread.start();
+    }
+
+    // GameController.java
+    public void stopGameLoop() {
+        if (gameThread != null) {
+            gameThread.stopGame(); // Неблокирующая остановка
+            gameThread = null;
+        }
+    }
+
+    // Обновление метода update в GameController
+    private boolean gameOverHandled = false;  // Флаг, чтобы не запускать завершение несколько раз
+
+    public boolean updateGameState() {
+        // Проверяем, завершена ли игра
+        if (gameLogic.isGameOver() || gameLogic.isGameWon()) {
+            // Если игра закончена, останавливаем игровой поток и показываем окно окончания игры
+            stopGameLoop();  // Останавливаем игровой поток
+            showGameOver();   // Показываем экран Game Over или Victory
+            return false;     // Прекращаем обновление игры
+        }
+
+        // Если игра не завершена, продолжаем обновлять состояние игры
+        gameLogic.update();
+        return true;  // Игра продолжается
+    }
+
     @FXML
-    public void initialize() {
+    public void initialize() throws Exception {
         backgroundImage = new Image(getClass().getResourceAsStream("/images/grass.png"));
         for (FruitType type : FruitType.values()) {
             fruitImages.put(type, new Image(getClass().getResourceAsStream(type.getImagePath())));
@@ -56,7 +94,7 @@ public class GameController {
         headImage = new Image(getClass().getResourceAsStream("/images/snake_head.png"));
         tailImage = new Image(getClass().getResourceAsStream("/images/snake_tail.png"));
         gc = gameCanvas.getGraphicsContext2D();
-        gameLogic = new GameLogic(BOARD_WIDTH, BOARD_HEIGHT, BOARD_WIDTH * BOARD_HEIGHT, currentLevel);
+        gameLogic = new GameLogic(BOARD_WIDTH * BOARD_HEIGHT, currentLevel);
         gameCanvas.setFocusTraversable(true);
         gameCanvas.requestFocus();
 
@@ -66,42 +104,18 @@ public class GameController {
             }
         });
 
-        gameLoop = new AnimationTimer() {
-            private long lastUpdate = 0;
-
-            @Override
-            public void handle(long now) {
-                if (now - lastUpdate >= 150_000_000) {
-                    update();
-                    render();
-                    lastUpdate = now;
-                }
+        gameCanvas.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.setOnKeyPressed(this::handleKeyPress);
             }
-        };
-        startText.setVisible(true); // Показываем текст перед стартом
-        gameLoop = createGameLoop();
+        });
+
+        startText.setVisible(true);
 
 
     }
-    // Обновить игровой цикл для использования интервала из GameLogic
-    private AnimationTimer createGameLoop() {
-        return new AnimationTimer() {
-            private long lastUpdate = 0;
 
-            @Override
-            public void handle(long now) {
-                if (!gameStarted) return;
-
-                if (now - lastUpdate >= gameLogic.getUpdateInterval()) {
-                    update();
-                    render();
-                    lastUpdate = now;
-                }
-            }
-        };
-    }
-
-    private void render() {
+    void render() {
         gc.clearRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         gc.drawImage(backgroundImage, 0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
 
@@ -155,45 +169,42 @@ public class GameController {
             );
         }
     }
-
-    private void showGameOver() {
-        try {
-            // Проверяем, что сцена существует
-            if (gameCanvas.getScene() == null) {
-                System.err.println("Canvas не привязан к сцене!");
-                return;
-            }
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/game_over.fxml"));
-            Parent root = loader.load();
-
-            GameOverController controller = loader.getController();
-            Stage stage = (Stage) gameCanvas.getScene().getWindow(); // Безопасно, так как проверка выше
-            controller.initialize(stage, gameLogic.getScore(), currentLevel, false);
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     private void update() {
-        if (!gameStarted) return; // Не обновляем состояние игры до старта
+        if (!gameStarted) return;
 
         if (gameLogic.isGameOver()) {
-            showGameOver();
-            gameLoop.stop();
-        }
-        else if (gameLogic.isGameWon()) {
+            System.out.println("[DEBUG] Game Over detected");
+            showGameOver(); // Убрать Platform.runLater()
+        } else if (gameLogic.isGameWon()) {
+            System.out.println("[DEBUG] Victory detected");
             showVictory();
-            gameLoop.stop();
-        }
-        else {
+        } else {
             gameLogic.update();
         }
     }
 
+
+    private void showGameOver() {
+        Platform.runLater(() -> {
+            try {
+                if (gameCanvas.getScene() == null) {
+                    System.out.println("[ERROR] Scene is null");
+                    return;
+                }
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/game_over.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) gameCanvas.getScene().getWindow();
+                GameOverController controller = loader.getController();
+                controller.initialize(stage, gameLogic.getScore(), currentLevel, false);
+                stage.setScene(new Scene(root));
+            } catch (IOException e) {
+                System.err.println("[CRITICAL] Failed to load game_over.fxml: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
     private void showVictory() {
+        stopGameLoop();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/game_over.fxml"));
             Parent root = loader.load();
@@ -212,7 +223,7 @@ public class GameController {
         if (!gameStarted && event.getCode() == KeyCode.SPACE) {
             gameStarted = true;
             startText.setVisible(false);
-            gameLoop.start();
+            startGameLoop(); // Запускаем игровой поток
             return;
         }
 

@@ -9,8 +9,8 @@ class GameLogicTest {
     private GameLogic gameLogic;
 
     @BeforeEach
-    void setUp() {
-        gameLogic = new GameLogic(20, 20, 10, 1);
+    void setUp() throws Exception {
+        gameLogic = new GameLogic(10, 1);
     }
 
     @Test
