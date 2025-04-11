@@ -46,7 +46,8 @@ public class GameController {
     // Установка уровня из меню выбора
     public void setLevel(int levelId) {
         try {
-            gameLogic = new GameLogic(BOARD_WIDTH * BOARD_HEIGHT, levelId);
+            LevelConfig config = LevelLoader.loadLevel(levelId);
+            gameLogic = new GameLogic(levelId);
             currentLevel = levelId;
         } catch (Exception e) {
             throw new RuntimeException("Failed to load level", e);
@@ -94,7 +95,7 @@ public class GameController {
         headImage = new Image(getClass().getResourceAsStream("/images/snake_head.png"));
         tailImage = new Image(getClass().getResourceAsStream("/images/snake_tail.png"));
         gc = gameCanvas.getGraphicsContext2D();
-        gameLogic = new GameLogic(BOARD_WIDTH * BOARD_HEIGHT, currentLevel);
+        gameLogic = new GameLogic(currentLevel);
         gameCanvas.setFocusTraversable(true);
         gameCanvas.requestFocus();
 

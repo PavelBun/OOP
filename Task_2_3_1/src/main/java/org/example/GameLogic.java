@@ -20,7 +20,7 @@ public class GameLogic {
     private long speedEffectEndTime = 0;
     private long baseUpdateInterval = 200_000_000;
 
-    public GameLogic(int targetLength, int level) throws Exception {
+    public GameLogic(int level) throws Exception {
         LevelConfig config = LevelLoader.loadLevel(level);
         this.targetLength = config.getTargetLength();
         snake = new Snake(new Point2D(BOARD_WIDTH / 2, BOARD_HEIGHT / 2));

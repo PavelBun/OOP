@@ -10,7 +10,7 @@ class GameLogicTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        gameLogic = new GameLogic(10, 1);
+        gameLogic = new GameLogic( 1);
     }
 
     @Test
