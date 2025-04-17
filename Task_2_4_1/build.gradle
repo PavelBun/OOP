@@ -1,6 +1,7 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.9.0'
     id 'java'
+    id 'jacoco'
 }
 apply plugin: 'application'
 mainClassName = 'org.example.core.Main'
@@ -30,4 +31,9 @@ java {
 
 kotlin {
     jvmToolchain(17) // вместо 21
+}
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
