@@ -1,6 +1,6 @@
 plugins {
-    java
-    jacoco
+    id("java")
+    id("jacoco")
     kotlin("jvm") version "1.9.22"
     application
 }
@@ -20,23 +20,15 @@ dependencies {
 application {
     mainClass.set("MainKt")
 }
-
-tasks.test {
-    useJUnitPlatform()
-    finalizedBy(tasks.jacocoTestReport) // Добавлено
-}
-
-jacoco {
-    toolVersion = "0.8.11"
-}
-
 tasks.jacocoTestReport {
+    val reportDir = file("../build/reports/jacoco/test")
+    reports.xml.outputLocation = reportDir.resolve("jacocoTestReport.xml")
     reports {
-        xml.required.set(true)
-        xml.outputLocation.set(layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml")) // Добавлено
-        html.required.set(true)
+        xml.required = true
     }
+
 }
+
 
 kotlin {
     jvmToolchain(21)
