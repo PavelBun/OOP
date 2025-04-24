@@ -29,7 +29,7 @@ tasks.withType<JavaCompile> {
     targetCompatibility = "21"
 }
 jacoco {
-    toolVersion = "0.8.11" // Укажите актуальную версию
+    toolVersion = "0.8.11" 
 }
 tasks.jacocoTestReport {
     reports {
